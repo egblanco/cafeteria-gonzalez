@@ -242,17 +242,18 @@
             }
             
             h1 {
-                /* Ocultar texto completo */
+                /* Ocultar texto original y mostrar versión móvil */
                 font-size: 0;
                 margin-bottom: 10px;
             }
             
-            /* Mostrar solo emoticon grande en móvil */
             h1::before {
-                content: '☕';
+                content: '☕ Cafetería González';
                 display: block;
-                font-size: 4em;
-                margin-bottom: 5px;
+                font-size: 2rem;
+                font-family: 'Georgia', serif;
+                font-weight: normal;
+                color: white;
             }
             
             .subtitle {
