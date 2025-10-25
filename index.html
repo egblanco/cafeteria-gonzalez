@@ -22,10 +22,47 @@
         header {
             text-align: center;
             padding: 40px 0;
-            background-color: #6d4c41;
+            background: linear-gradient(135deg, 
+                #8d6e63 0%, 
+                #6d4c41 20%, 
+                #5d4037 40%, 
+                #4e342e 60%, 
+                #3e2723 80%, 
+                #2e1a16 100%);
+            background-size: 400% 400%;
+            animation: woodGrain 20s ease-in-out infinite;
             color: white;
             border-radius: 10px;
             margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent 0px,
+                rgba(139, 69, 19, 0.1) 2px,
+                transparent 4px,
+                rgba(160, 82, 45, 0.15) 6px,
+                transparent 8px
+            );
+            pointer-events: none;
+        }
+        
+        @keyframes woodGrain {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
         }
         
         .logo {
