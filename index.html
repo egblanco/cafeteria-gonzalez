@@ -158,12 +158,44 @@
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
             position: relative;
             animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        .modal-body-content {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 20px;
+            align-items: start;
+        }
+        
+        .modal-info {
+            min-width: 0;
+        }
+        
+        .modal-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 600px) {
+            .modal-body-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .modal-image {
+                width: 100%;
+                max-width: 300px;
+                justify-self: center;
+            }
         }
         
         .modal-header {
@@ -350,12 +382,31 @@
             </div>
             <div id="modalBody">
                 <p id="modalDescription"></p>
-                <div id="modalDetails"></div>
+                <div class="modal-body-content">
+                    <div class="modal-info">
+                        <div id="modalDetails"></div>
+                    </div>
+                    <img id="modalImage" class="modal-image" alt="Imagen del café">
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Mapeo de imágenes para cada tipo de café
+        const coffeeImages = {
+            'Espresso': 'https://images.unsplash.com/photo-1510707577719-ae7c14805e76?w=400',
+            'Café con leche': 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400',
+            'Capuchino': 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
+            'Latte Macchiato': 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
+            'Bombón': 'https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?w=400',
+            'Mocha': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400',
+            'Flat White': 'https://images.unsplash.com/photo-1497636577773-f1231844b336?w=400',
+            'Cortado': 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
+            'Miel': 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400',
+            'Especial 1 – Latte Macchiato Miel y Canela': 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400'
+        };
+        
         function openModal(title, description, ingredients, preparation) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalDescription').textContent = description;
@@ -374,6 +425,12 @@
             detailsHTML += '</ol>';
             
             document.getElementById('modalDetails').innerHTML = detailsHTML;
+            
+            // Configurar la imagen del café
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = coffeeImages[title] || 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400';
+            modalImage.alt = `Imagen de ${title}`;
+            
             document.getElementById('recipeModal').classList.add('show');
             document.body.style.overflow = 'hidden';
         }
