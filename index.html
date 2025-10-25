@@ -231,6 +231,33 @@
                 max-width: 300px;
                 justify-self: center;
             }
+            
+            /* Simplificar banner en móvil - solo emoticon */
+            header {
+                padding: 15px 0;
+            }
+            
+            .logo {
+                display: none;
+            }
+            
+            h1 {
+                /* Ocultar texto completo */
+                font-size: 0;
+                margin-bottom: 10px;
+            }
+            
+            /* Mostrar solo emoticon grande en móvil */
+            h1::before {
+                content: '☕';
+                display: block;
+                font-size: 4em;
+                margin-bottom: 5px;
+            }
+            
+            .subtitle {
+                font-size: 0.9em;
+            }
         }
         
         .modal-header {
