@@ -133,8 +133,89 @@
             border-top: 1px solid #d7ccc8;
         }
         
-        .details.show {
-            display: block;
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d7ccc8;
+        }
+        
+        .modal-title {
+            color: #6d4c41;
+            font-size: 1.8em;
+            margin: 0;
+        }
+        
+        .close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #6d4c41;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        
+        .close:hover {
+            background-color: #f5e6d3;
+            transform: scale(1.1);
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .details h3 {
@@ -202,259 +283,119 @@
     </header>
 
     <div class="menu">
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Espresso', 'Café corto e intenso, pura esencia del grano.', 'Café molido: 7-9 gramos|Agua: 25-30 ml|Azúcar: al gusto (0-5 gramos)', 'Calienta la máquina de espresso|Muele el café fino y colócalo en el portafiltro|Presiona firmemente el café|Extrae durante 25-30 segundos|Sirve inmediatamente')">
             <h2>Espresso</h2>
             <p>Café corto e intenso, pura esencia del grano.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Agua: 25-30 ml</li>
-                    <li>Azúcar: al gusto (0-5 gramos)</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Calienta la máquina de espresso</li>
-                    <li>Muele el café fino y colócalo en el portafiltro</li>
-                    <li>Presiona firmemente el café</li>
-                    <li>Extrae durante 25-30 segundos</li>
-                    <li>Sirve inmediatamente</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Café con leche', 'Clásico balance entre espresso y leche caliente.', 'Café molido: 7-9 gramos|Leche: 150 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Prepara un espresso|Calienta la leche sin que hierva (60-65°C)|Vierte el espresso en una taza grande|Añade la leche caliente|Agrega azúcar al gusto y revuelve')">
             <h2>Café con leche</h2>
             <p>Clásico balance entre espresso y leche caliente.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Leche: 150 ml</li>
-                    <li>Agua: 30 ml</li>
-                    <li>Azúcar: al gusto (0-10 gramos)</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Prepara un espresso</li>
-                    <li>Calienta la leche sin que hierva (60-65°C)</li>
-                    <li>Vierte el espresso en una taza grande</li>
-                    <li>Añade la leche caliente</li>
-                    <li>Agrega azúcar al gusto y revuelve</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Capuchino', 'Espresso con leche espumada, textura suave y cremosa.', 'Café molido: 7-9 gramos|Leche: 120 ml|Agua: 30 ml|Azúcar: al gusto (0-8 gramos)|Canela en polvo: opcional', 'Prepara un espresso|Vaporiza la leche hasta crear espuma cremosa|Vierte el espresso en una taza|Añade la leche con movimiento circular|Completa con espuma|Espolvorea canela si deseas')">
             <h2>Capuchino</h2>
             <p>Espresso con leche espumada, textura suave y cremosa.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Leche: 120 ml</li>
-                    <li>Agua: 30 ml</li>
-                    <li>Azúcar: al gusto (0-8 gramos)</li>
-                    <li>Canela en polvo: opcional</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Prepara un espresso</li>
-                    <li>Vaporiza la leche hasta crear espuma cremosa</li>
-                    <li>Vierte el espresso en una taza</li>
-                    <li>Añade la leche con movimiento circular</li>
-                    <li>Completa con espuma</li>
-                    <li>Espolvorea canela si deseas</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Latte Macchiato', 'Leche caliente con un toque delicado de espresso.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Vaporiza la leche creando buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Vierte lentamente el espresso sobre la leche|Se formarán 3 capas: leche, café, espuma')">
             <h2>Latte Macchiato</h2>
             <p>Leche caliente con un toque delicado de espresso.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Leche: 200 ml</li>
-                    <li>Agua: 30 ml</li>
-                    <li>Azúcar: al gusto (0-10 gramos)</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Vaporiza la leche creando buena espuma</li>
-                    <li>Vierte la leche en un vaso alto de vidrio</li>
-                    <li>Prepara un espresso</li>
-                    <li>Vierte lentamente el espresso sobre la leche</li>
-                    <li>Se formarán 3 capas: leche, café, espuma</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Bombón', 'Espresso con leche condensada, dulce y reconfortante.', 'Café molido: 7-9 gramos|Leche condensada: 30-40 ml|Agua: 30 ml|Espuma de leche: opcional (para decorar)|Azúcar: no necesita (la leche condensada es dulce)', 'Vierte la leche condensada en un vaso de vidrio|Prepara un espresso|Vierte el espresso cuidadosamente sobre la leche condensada|Se formará una bonita capa doble|Opcionalmente, corona con espuma de leche|Revuelve antes de beber')">
             <h2>Bombón</h2>
             <p>Espresso con leche condensada, dulce y reconfortante.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Leche condensada: 30-40 ml</li>
-                    <li>Agua: 30 ml</li>
-                    <li>Espuma de leche: opcional (para decorar)</li>
-                    <li>Azúcar: no necesita (la leche condensada es dulce)</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Vierte la leche condensada en un vaso de vidrio</li>
-                    <li>Prepara un espresso</li>
-                    <li>Vierte el espresso cuidadosamente sobre la leche condensada</li>
-                    <li>Se formará una bonita capa doble</li>
-                    <li>Opcionalmente, corona con espuma de leche</li>
-                    <li>Revuelve antes de beber</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Mocha', 'Combinación deliciosa de café, leche y chocolate.', 'Café molido: 7-9 gramos|Leche: 150 ml|Chocolate o cacao: 15-20 gramos|Agua: 30 ml|Azúcar: 5-10 gramos|Crema batida: opcional', 'Derrite el chocolate con un poco de leche caliente|Prepara un espresso|Mezcla el chocolate derretido con el espresso|Vaporiza el resto de la leche|Vierte la leche en la mezcla|Decora con crema batida y cacao en polvo')">
             <h2>Mocha</h2>
             <p>Combinación deliciosa de café, leche y chocolate.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Leche: 150 ml</li>
-                    <li>Chocolate o cacao: 15-20 gramos</li>
-                    <li>Agua: 30 ml</li>
-                    <li>Azúcar: 5-10 gramos</li>
-                    <li>Crema batida: opcional</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Derrite el chocolate con un poco de leche caliente</li>
-                    <li>Prepara un espresso</li>
-                    <li>Mezcla el chocolate derretido con el espresso</li>
-                    <li>Vaporiza el resto de la leche</li>
-                    <li>Vierte la leche en la mezcla</li>
-                    <li>Decora con crema batida y cacao en polvo</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Flat White', 'Suave microespuma y sabor concentrado de café.', 'Café molido: 14-18 gramos (doble shot)|Leche: 120 ml|Agua: 60 ml|Azúcar: al gusto (0-8 gramos)', 'Prepara un espresso doble|Vaporiza la leche creando microespuma (burbujas muy finas)|Vierte el espresso en una taza|Añade la leche con técnica de latte art|La capa de espuma debe ser delgada (0.5 cm)')">
             <h2>Flat White</h2>
             <p>Suave microespuma y sabor concentrado de café.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 14-18 gramos (doble shot)</li>
-                    <li>Leche: 120 ml</li>
-                    <li>Agua: 60 ml</li>
-                    <li>Azúcar: al gusto (0-8 gramos)</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Prepara un espresso doble</li>
-                    <li>Vaporiza la leche creando microespuma (burbujas muy finas)</li>
-                    <li>Vierte el espresso en una taza</li>
-                    <li>Añade la leche con técnica de latte art</li>
-                    <li>La capa de espuma debe ser delgada (0.5 cm)</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Cortado', 'Espresso suavizado con un toque de leche caliente.', 'Café molido: 7-9 gramos|Leche: 30-40 ml|Agua: 30 ml|Azúcar: al gusto (0-5 gramos)', 'Prepara un espresso en una taza pequeña|Calienta una pequeña cantidad de leche|Añade la leche al espresso|Corta el sabor fuerte del café|Sirve en taza pequeña tipo cortado')">
             <h2>Cortado</h2>
             <p>Espresso suavizado con un toque de leche caliente.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Leche: 30-40 ml</li>
-                    <li>Agua: 30 ml</li>
-                    <li>Azúcar: al gusto (0-5 gramos)</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Prepara un espresso en una taza pequeña</li>
-                    <li>Calienta una pequeña cantidad de leche</li>
-                    <li>Añade la leche al espresso</li>
-                    <li>"Corta" el sabor fuerte del café</li>
-                    <li>Sirve en taza pequeña tipo cortado</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Miel', 'Añadido dulce y aromático que encanta el paladar.', 'Café molido: 7-9 gramos|Agua: 30 ml|Miel: 10-15 gramos|Leche: 100 ml (opcional)', 'Prepara un espresso|Añade la miel al café caliente|Revuelve bien hasta disolver completamente|Si deseas, añade leche vaporizada|Disfruta del dulzor natural de la miel')">
             <h2>Miel</h2>
             <p>Añadido dulce y aromático que encanta el paladar.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Agua: 30 ml</li>
-                    <li>Miel: 10-15 gramos</li>
-                    <li>Leche: 100 ml (opcional)</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Prepara un espresso</li>
-                    <li>Añade la miel al café caliente</li>
-                    <li>Revuelve bien hasta disolver completamente</li>
-                    <li>Si deseas, añade leche vaporizada</li>
-                    <li>Disfruta del dulzor natural de la miel</li>
-                </ol>
-            </div>
         </div>
 
-        <div class="card" onclick="toggleDetails(this)">
+        <div class="card" onclick="openModal('Especial 1 – Latte Macchiato Miel y Canela', 'Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Miel: 15-20 gramos|Esencia de vainilla: 2-3 gotas|Canela en polvo: 1-2 gramos', 'Mezcla la miel con las gotas de vainilla|Vaporiza la leche hasta crear buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Añade la mezcla de miel y vainilla al espresso|Vierte lentamente el espresso sobre la leche|Espolvorea canela en la parte superior|Sirve con una cucharita para mezclar al gusto')">
             <h2>Especial 1 – Latte Macchiato Miel y Canela</h2>
             <p>Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.</p>
-            <div class="details">
-                <h3>Ingredientes:</h3>
-                <ul>
-                    <li>Café molido: 7-9 gramos</li>
-                    <li>Leche: 200 ml</li>
-                    <li>Agua: 30 ml</li>
-                    <li>Miel: 15-20 gramos</li>
-                    <li>Esencia de vainilla: 2-3 gotas</li>
-                    <li>Canela en polvo: 1-2 gramos</li>
-                </ul>
-                <h3>Preparación:</h3>
-                <ol>
-                    <li>Mezcla la miel con las gotas de vainilla</li>
-                    <li>Vaporiza la leche hasta crear buena espuma</li>
-                    <li>Vierte la leche en un vaso alto de vidrio</li>
-                    <li>Prepara un espresso</li>
-                    <li>Añade la mezcla de miel y vainilla al espresso</li>
-                    <li>Vierte lentamente el espresso sobre la leche</li>
-                    <li>Espolvorea canela en la parte superior</li>
-                    <li>Sirve con una cucharita para mezclar al gusto</li>
-                </ol>
-            </div>
         </div>
     </div>
 
     <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800" alt="Taza de café aromático" class="cafe-image">
 
     <footer>
-        <p>Hecho con amor ❤️ | Cafetería Gonzales 2025</p>
+        <p>Hecho con amor ❤️ | Cafetería González 2025</p>
         <p><a href="https://github.com/egblanco/cafeteria-gonzalez" target="_blank" style="color: #6d4c41; text-decoration: none;">Ver en GitHub</a></p>
     </footer>
 
+    <!-- Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody">
+                <p id="modalDescription"></p>
+                <div id="modalDetails"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function toggleDetails(clickedCard) {
-            // Obtener todos los detalles que están abiertos
-            const allDetails = document.querySelectorAll('.details');
+        function openModal(title, description, ingredients, preparation) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
             
-            // Cerrar todos los detalles
-            allDetails.forEach(detail => {
-                detail.classList.remove('show');
+            const ingredientsList = ingredients.split('|');
+            const preparationList = preparation.split('|');
+            
+            let detailsHTML = '<h3>Ingredientes:</h3><ul>';
+            ingredientsList.forEach(ingredient => {
+                detailsHTML += `<li>${ingredient}</li>`;
             });
+            detailsHTML += '</ul><h3>Preparación:</h3><ol>';
+            preparationList.forEach(step => {
+                detailsHTML += `<li>${step}</li>`;
+            });
+            detailsHTML += '</ol>';
             
-            // Abrir solo el que se clickeó
-            const currentDetails = clickedCard.querySelector('.details');
-            currentDetails.classList.add('show');
+            document.getElementById('modalDetails').innerHTML = detailsHTML;
+            document.getElementById('recipeModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
         }
+        
+        function closeModal() {
+            document.getElementById('recipeModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        document.getElementById('recipeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
