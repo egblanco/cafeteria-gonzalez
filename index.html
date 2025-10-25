@@ -181,9 +181,44 @@
             width: 200px;
             height: 200px;
             border-radius: 10px;
-            object-fit: cover;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .coffee-gradient {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .coffee-gradient::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 10%;
+            border-radius: 50%;
+            opacity: 0.3;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6) 0%, transparent 50%);
+        }
+        
+        /* Gradientes específicos para cada café */
+        .espresso { background: linear-gradient(180deg, #2c1810 0%, #4a2c17 30%, #6d4c41 70%, #8d6e63 100%); }
+        .cafe-con-leche { background: linear-gradient(180deg, #f5e6d3 0%, #d7ccc8 20%, #a1887f 50%, #6d4c41 100%); }
+        .capuchino { background: linear-gradient(180deg, #ffffff 0%, #f5e6d3 30%, #d7ccc8 60%, #6d4c41 100%); }
+        .latte-macchiato { background: linear-gradient(180deg, #ffffff 0%, #f5e6d3 25%, #d7ccc8 50%, #8d6e63 75%, #5d4037 100%); }
+        .bombon { background: linear-gradient(180deg, #fff8e1 0%, #ffcc80 30%, #d7940c 60%, #5d4037 100%); }
+        .mocha { background: linear-gradient(180deg, #ffffff 0%, #d7ccc8 20%, #8d6e63 40%, #5d4037 60%, #3e2723 80%, #1b0a06 100%); }
+        .flat-white { background: linear-gradient(180deg, #ffffff 0%, #f5e6d3 15%, #d7ccc8 40%, #a1887f 70%, #6d4c41 100%); }
+        .cortado { background: linear-gradient(180deg, #f5e6d3 0%, #d7ccc8 40%, #8d6e63 80%, #5d4037 100%); }
+        .miel { background: linear-gradient(180deg, #fff8e1 0%, #ffcc80 25%, #ffa726 50%, #8d6e63 75%, #5d4037 100%); }
+        .especial { background: linear-gradient(180deg, #ffffff 0%, #fff8e1 20%, #ffcc80 40%, #d7940c 60%, #8d6e63 80%, #5d4037 100%); }
         
         @media (max-width: 600px) {
             .modal-body-content {
@@ -386,25 +421,27 @@
                     <div class="modal-info">
                         <div id="modalDetails"></div>
                     </div>
-                    <img id="modalImage" class="modal-image" alt="Imagen del café">
+                    <div class="modal-image">
+                        <div id="coffeeGradient" class="coffee-gradient"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Mapeo de imágenes para cada tipo de café
-        const coffeeImages = {
-            'Espresso': 'https://images.unsplash.com/photo-1510707577719-ae7c14805e76?w=400',
-            'Café con leche': 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400',
-            'Capuchino': 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400',
-            'Latte Macchiato': 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
-            'Bombón': 'https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?w=400',
-            'Mocha': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400',
-            'Flat White': 'https://images.unsplash.com/photo-1497636577773-f1231844b336?w=400',
-            'Cortado': 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400',
-            'Miel': 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400',
-            'Especial 1 – Latte Macchiato Miel y Canela': 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400'
+        // Mapeo de clases CSS para cada tipo de café
+        const coffeeGradients = {
+            'Espresso': 'espresso',
+            'Café con leche': 'cafe-con-leche',
+            'Capuchino': 'capuchino',
+            'Latte Macchiato': 'latte-macchiato',
+            'Bombón': 'bombon',
+            'Mocha': 'mocha',
+            'Flat White': 'flat-white',
+            'Cortado': 'cortado',
+            'Miel': 'miel',
+            'Especial 1 – Latte Macchiato Miel y Canela': 'especial'
         };
         
         function openModal(title, description, ingredients, preparation) {
@@ -426,10 +463,13 @@
             
             document.getElementById('modalDetails').innerHTML = detailsHTML;
             
-            // Configurar la imagen del café
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = coffeeImages[title] || 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400';
-            modalImage.alt = `Imagen de ${title}`;
+            // Configurar el gradiente del café
+            const coffeeGradient = document.getElementById('coffeeGradient');
+            // Limpiar clases anteriores
+            coffeeGradient.className = 'coffee-gradient';
+            // Añadir la clase específica del café
+            const gradientClass = coffeeGradients[title] || 'espresso';
+            coffeeGradient.classList.add(gradientClass);
             
             document.getElementById('recipeModal').classList.add('show');
             document.body.style.overflow = 'hidden';
