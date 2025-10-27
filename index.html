@@ -279,6 +279,9 @@
             cursor: pointer;
             transition: background-color 0.2s ease;
             color: #5d4037;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         .coffee-menu-item:hover {
@@ -287,6 +290,18 @@
         
         .coffee-menu-item:last-child {
             border-bottom: none;
+        }
+        
+        .coffee-menu-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        
+        .coffee-menu-name {
+            font-size: 0.9em;
+            font-weight: 500;
         }
         
         .coffee-menu-header {
@@ -471,16 +486,46 @@
     <!-- Menú desplegable de cafés -->
     <div id="coffeeMenuDropdown" class="coffee-menu-dropdown">
         <div class="coffee-menu-header">☕ Menú de Cafés</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Espresso')">Espresso</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Café con leche')">Café con leche</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Capuchino')">Capuchino</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Latte Macchiato')">Latte Macchiato</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Bombón')">Bombón</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Mocha')">Mocha</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Flat White')">Flat White</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Cortado')">Cortado</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Miel')">Miel</div>
-        <div class="coffee-menu-item" onclick="scrollToCard('Especial 1 – Latte Macchiato Miel y Canela')">Especial 1 – Latte Macchiato Miel y Canela</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Espresso')">
+            <div class="coffee-menu-image coffee-gradient espresso"></div>
+            <span class="coffee-menu-name">Espresso</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Café con leche')">
+            <div class="coffee-menu-image coffee-gradient cafe-con-leche"></div>
+            <span class="coffee-menu-name">Café con leche</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Capuchino')">
+            <div class="coffee-menu-image coffee-gradient capuchino"></div>
+            <span class="coffee-menu-name">Capuchino</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Latte Macchiato')">
+            <div class="coffee-menu-image coffee-gradient latte-macchiato"></div>
+            <span class="coffee-menu-name">Latte Macchiato</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Bombón')">
+            <div class="coffee-menu-image coffee-gradient bombon"></div>
+            <span class="coffee-menu-name">Bombón</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Mocha')">
+            <div class="coffee-menu-image coffee-gradient mocha"></div>
+            <span class="coffee-menu-name">Mocha</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Flat White')">
+            <div class="coffee-menu-image coffee-gradient flat-white"></div>
+            <span class="coffee-menu-name">Flat White</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Cortado')">
+            <div class="coffee-menu-image coffee-gradient cortado"></div>
+            <span class="coffee-menu-name">Cortado</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Miel')">
+            <div class="coffee-menu-image coffee-gradient miel"></div>
+            <span class="coffee-menu-name">Miel</span>
+        </div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Especial 1 – Latte Macchiato Miel y Canela')">
+            <div class="coffee-menu-image coffee-gradient especial"></div>
+            <span class="coffee-menu-name">Especial Miel y Canela</span>
+        </div>
     </div>
 
     <header>
