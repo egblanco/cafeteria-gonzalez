@@ -220,6 +220,17 @@
         .miel { background: linear-gradient(180deg, #fff8e1 0%, #ffcc80 25%, #ffa726 50%, #8d6e63 75%, #5d4037 100%); }
         .especial { background: linear-gradient(180deg, #ffffff 0%, #fff8e1 20%, #ffcc80 40%, #d7940c 60%, #8d6e63 80%, #5d4037 100%); }
         
+        /* Nuevos gradientes para cafés adicionales */
+        .moka-italiano { background: linear-gradient(180deg, #2e1a16 0%, #3e2723 25%, #4e342e 50%, #5d4037 75%, #6d4c41 100%); }
+        .latte-italiano { background: linear-gradient(180deg, #ffffff 0%, #f5e6d3 20%, #d7ccc8 40%, #a1887f 60%, #6d4c41 80%, #5d4037 100%); }
+        .cafe-miel-canela { background: linear-gradient(180deg, #fff8e1 0%, #ffcc80 20%, #ffa726 40%, #d4911a 60%, #8d6e63 80%, #5d4037 100%); }
+        .cafe-filtrado { background: linear-gradient(180deg, #8d6e63 0%, #7d5e4f 20%, #6d4c41 40%, #5d4037 60%, #4e342e 80%, #3e2723 100%); }
+        .cafe-vainilla { background: linear-gradient(180deg, #fff8e1 0%, #f3e5ab 25%, #e6d192 50%, #d4ae49 75%, #8d6e63 100%); }
+        .cafe-chocolate { background: linear-gradient(180deg, #f5e6d3 0%, #d7ccc8 20%, #8d6e63 40%, #6d4c41 60%, #4e342e 80%, #2d1b13 100%); }
+        .capuchino-facil { background: linear-gradient(180deg, #ffffff 0%, #f8f4e6 25%, #e8d5c4 50%, #d7ccc8 75%, #8d6e63 100%); }
+        .affogato { background: linear-gradient(180deg, #ffffff 0%, #fffde7 20%, #fff3c4 40%, #ffecb3 60%, #8d6e63 80%, #5d4037 100%); }
+        .cafe-frio { background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 25%, #90caf9 50%, #64b5f6 75%, #8d6e63 100%); }
+        
         
         @keyframes slideDown {
             from {
@@ -460,6 +471,51 @@
             <h2>Especial 1 – Latte Macchiato Miel y Canela</h2>
             <p>Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.</p>
         </div>
+
+        <div id="card-Café Moka Italiano" class="card" onclick="openModal('Café Moka Italiano', 'Café intenso preparado con cafetera italiana tradicional.', 'Café molido medio-fino|Agua|Azúcar: opcional', 'Llena la base con agua hasta la válvula|Coloca el café molido en el filtro sin presionar|Enrosca la cafetera y pon a fuego medio|Retira del fuego cuando empiece a salir café|Sirve caliente inmediatamente')">
+            <h2>Café Moka Italiano</h2>
+            <p>Café intenso preparado con cafetera italiana tradicional.</p>
+        </div>
+
+        <div id="card-Latte Italiano" class="card" onclick="openModal('Latte Italiano', 'Cremoso latte con base de café moka italiano.', 'Café de moka italiano|Leche para vaporizar|Espuma ligera', 'Prepara café moka italiano|Vaporiza la leche creando espuma ligera|Vierte la leche vaporizada sobre el café|Corona con una ligera capa de espuma|Sirve inmediatamente')">
+            <h2>Latte Italiano</h2>
+            <p>Cremoso latte con base de café moka italiano.</p>
+        </div>
+
+        <div id="card-Café Miel y Canela Moka" class="card" onclick="openModal('Café Miel y Canela Moka', 'Café moka endulzado naturalmente con miel y canela.', 'Café de moka italiano|1 cucharadita de miel|Una pizca de canela|Leche caliente: opcional', 'Prepara café moka italiano|Mezcla la miel con el café caliente hasta disolver|Espolvorea canela al gusto|Añade leche caliente si deseas|Revuelve y disfruta del aroma')">
+            <h2>Café Miel y Canela Moka</h2>
+            <p>Café moka endulzado naturalmente con miel y canela.</p>
+        </div>
+
+        <div id="card-Café Filtrado Clásico" class="card" onclick="openModal('Café Filtrado Clásico', 'Café tradicional de cafetera de filtro, suave y aromático.', 'Café molido medio|Agua filtrada|Azúcar o leche: opcional', 'Coloca el filtro en la cafetera|Añade café molido (1 cucharada por taza)|Vierte agua fría en el depósito|Enciende la cafetera y espera|Sirve negro o con un toque de leche')">
+            <h2>Café Filtrado Clásico</h2>
+            <p>Café tradicional de cafetera de filtro, suave y aromático.</p>
+        </div>
+
+        <div id="card-Café de Vainilla" class="card" onclick="openModal('Café de Vainilla', 'Café filtrado con delicioso aroma de vainilla.', 'Café filtrado|Esencia de vainilla (2-3 gotas)|Leche: opcional|Azúcar: al gusto', 'Prepara café filtrado normal|Añade gotas de esencia de vainilla|Mezcla bien para distribuir el sabor|Agrega leche si deseas|Endulza al gusto')">
+            <h2>Café de Vainilla</h2>
+            <p>Café filtrado con delicioso aroma de vainilla.</p>
+        </div>
+
+        <div id="card-Café con Chocolate" class="card" onclick="openModal('Café con Chocolate', 'Café filtrado con rico sabor a chocolate.', 'Café filtrado|Cacao en polvo o sirope de chocolate|Leche caliente|Azúcar: al gusto', 'Prepara café filtrado|Mezcla cacao en polvo o sirope con el café|Añade leche caliente al gusto|Revuelve hasta integrar completamente|Endulza si es necesario')">
+            <h2>Café con Chocolate</h2>
+            <p>Café filtrado con rico sabor a chocolate.</p>
+        </div>
+
+        <div id="card-Capuchino Fácil" class="card" onclick="openModal('Capuchino Fácil', 'Capuchino casero con cualquier tipo de café concentrado.', 'Café concentrado (moka o filtrado fuerte)|Leche para vaporizar|Cacao o canela en polvo', 'Prepara café concentrado|Vaporiza la leche hasta crear espuma|Vierte el café en una taza|Añade la leche vaporizada|Espolvorea cacao o canela encima')">
+            <h2>Capuchino Fácil</h2>
+            <p>Capuchino casero con cualquier tipo de café concentrado.</p>
+        </div>
+
+        <div id="card-Affogato" class="card" onclick="openModal('Affogato', 'Postre italiano de helado bañado en café caliente.', 'Café caliente concentrado (moka o filtrado fuerte)|1 bola de helado de vainilla|Opcional: galleta o bizcocho', 'Coloca una bola de helado de vainilla en una copa|Prepara café caliente y concentrado|Vierte el café caliente sobre el helado|Sirve inmediatamente con cucharita|Acompaña con galleta si deseas')">
+            <h2>Affogato</h2>
+            <p>Postre italiano de helado bañado en café caliente.</p>
+        </div>
+
+        <div id="card-Café Frío Casero" class="card" onclick="openModal('Café Frío Casero', 'Refrescante café frío estilo cold brew casero.', 'Café preparado (enfriado)|Hielo abundante|Leche fría o esencia de vainilla|Azúcar o edulcorante', 'Prepara café con cafetera normal|Deja enfriar completamente|Llena un vaso con hielo|Vierte el café frío sobre el hielo|Añade leche fría o vainilla al gusto')">
+            <h2>Café Frío Casero</h2>
+            <p>Refrescante café frío estilo cold brew casero.</p>
+        </div>
     </div>
 
     <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800" alt="Taza de café aromático" class="cafe-image">
@@ -502,7 +558,16 @@
             'Flat White': 'flat-white',
             'Cortado': 'cortado',
             'Miel': 'miel',
-            'Especial 1 – Latte Macchiato Miel y Canela': 'especial'
+            'Especial 1 – Latte Macchiato Miel y Canela': 'especial',
+            'Café Moka Italiano': 'moka-italiano',
+            'Latte Italiano': 'latte-italiano',
+            'Café Miel y Canela Moka': 'cafe-miel-canela',
+            'Café Filtrado Clásico': 'cafe-filtrado',
+            'Café de Vainilla': 'cafe-vainilla',
+            'Café con Chocolate': 'cafe-chocolate',
+            'Capuchino Fácil': 'capuchino-facil',
+            'Affogato': 'affogato',
+            'Café Frío Casero': 'cafe-frio'
         };
         
         function openModal(title, description, ingredients, preparation) {
