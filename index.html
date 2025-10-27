@@ -220,116 +220,6 @@
         .miel { background: linear-gradient(180deg, #fff8e1 0%, #ffcc80 25%, #ffa726 50%, #8d6e63 75%, #5d4037 100%); }
         .especial { background: linear-gradient(180deg, #ffffff 0%, #fff8e1 20%, #ffcc80 40%, #d7940c 60%, #8d6e63 80%, #5d4037 100%); }
         
-        /* Botón de menú de cafés - solo en móvil */
-        .menu-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background-color: #6d4c41;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            display: none; /* Oculto por defecto */
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-        }
-        
-        .menu-button img {
-            width: 24px;
-            height: 24px;
-            filter: brightness(0) invert(1); /* Hace la imagen blanca */
-        }
-        
-        .menu-button:hover {
-            background-color: #5d4037;
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* Imagen de menú de cafés */
-        .coffee-menu-image-display {
-            position: fixed;
-            top: 80px;
-            left: 20px;
-            z-index: 1000;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            width: 300px;
-            height: 400px;
-            display: none;
-            animation: slideDown 0.3s ease-out;
-            overflow: hidden;
-        }
-        
-        .coffee-menu-image-display.show {
-            display: block;
-        }
-        
-        .menu-image {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #f5e6d3 0%, #d7ccc8 100%);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
-        
-        .menu-title {
-            text-align: center;
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #6d4c41;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #6d4c41;
-            padding-bottom: 10px;
-        }
-        
-        .coffee-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            flex: 1;
-        }
-        
-        .coffee-item {
-            background: white;
-            border-radius: 8px;
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        
-        .coffee-item:hover {
-            transform: scale(1.05);
-        }
-        
-        .coffee-mini-gradient {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-bottom: 4px;
-        }
-        
-        .coffee-item-name {
-            font-size: 0.7em;
-            text-align: center;
-            color: #5d4037;
-            font-weight: 500;
-            line-height: 1.1;
-        }
         
         @keyframes slideDown {
             from {
@@ -354,7 +244,7 @@
                 justify-self: center;
             }
             
-            /* Simplificar banner en móvil - solo emoticon */
+            /* Simplificar banner en móvil */
             header {
                 padding: 15px 0;
             }
@@ -382,9 +272,24 @@
                 font-size: 0.9em;
             }
             
-            /* Mostrar botón de menú solo en móvil */
-            .menu-button {
-                display: flex;
+            /* Cambiar a 2 columnas en móvil */
+            .menu {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .card h2 {
+                font-size: 1.3em;
+                margin-bottom: 10px;
+            }
+            
+            .card p {
+                font-size: 0.9em;
+                line-height: 1.4;
             }
         }
         
@@ -496,59 +401,6 @@
     </style>
 </head>
 <body>
-    <!-- Botón de menú de cafés - solo móvil -->
-    <button class="menu-button" onclick="toggleCoffeeMenu()">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E" alt="Menú">
-    </button>
-    
-    <!-- Imagen de menú de cafés -->
-    <div id="coffeeMenuDropdown" class="coffee-menu-image-display">
-        <div class="menu-image">
-            <div class="menu-title">☕ Menú de Cafés</div>
-            <div class="coffee-grid">
-                <div class="coffee-item" onclick="scrollToCard('Espresso')">
-                    <div class="coffee-mini-gradient coffee-gradient espresso"></div>
-                    <span class="coffee-item-name">Espresso</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Café con leche')">
-                    <div class="coffee-mini-gradient coffee-gradient cafe-con-leche"></div>
-                    <span class="coffee-item-name">Café con leche</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Capuchino')">
-                    <div class="coffee-mini-gradient coffee-gradient capuchino"></div>
-                    <span class="coffee-item-name">Capuchino</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Latte Macchiato')">
-                    <div class="coffee-mini-gradient coffee-gradient latte-macchiato"></div>
-                    <span class="coffee-item-name">Latte Macchiato</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Bombón')">
-                    <div class="coffee-mini-gradient coffee-gradient bombon"></div>
-                    <span class="coffee-item-name">Bombón</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Mocha')">
-                    <div class="coffee-mini-gradient coffee-gradient mocha"></div>
-                    <span class="coffee-item-name">Mocha</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Flat White')">
-                    <div class="coffee-mini-gradient coffee-gradient flat-white"></div>
-                    <span class="coffee-item-name">Flat White</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Cortado')">
-                    <div class="coffee-mini-gradient coffee-gradient cortado"></div>
-                    <span class="coffee-item-name">Cortado</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Miel')">
-                    <div class="coffee-mini-gradient coffee-gradient miel"></div>
-                    <span class="coffee-item-name">Miel</span>
-                </div>
-                <div class="coffee-item" onclick="scrollToCard('Especial 1 – Latte Macchiato Miel y Canela')">
-                    <div class="coffee-mini-gradient coffee-gradient especial"></div>
-                    <span class="coffee-item-name">Especial</span>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <header>
         <div class="logo">
@@ -700,44 +552,6 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
-                closeCoffeeMenu();
-            }
-        });
-        
-        // Funciones para el menú de cafés
-        function toggleCoffeeMenu() {
-            const dropdown = document.getElementById('coffeeMenuDropdown');
-            dropdown.classList.toggle('show');
-        }
-        
-        function closeCoffeeMenu() {
-            const dropdown = document.getElementById('coffeeMenuDropdown');
-            dropdown.classList.remove('show');
-        }
-        
-        function scrollToCard(coffeeName) {
-            const cardId = 'card-' + coffeeName;
-            const card = document.getElementById(cardId);
-            if (card) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // Cerrar el menú después de hacer scroll
-                closeCoffeeMenu();
-                // Efecto de resaltado temporal
-                card.style.transform = 'scale(1.05)';
-                card.style.transition = 'transform 0.3s ease';
-                setTimeout(() => {
-                    card.style.transform = 'scale(1)';
-                }, 1000);
-            }
-        }
-        
-        // Cerrar menú al hacer clic fuera de él
-        document.addEventListener('click', function(e) {
-            const menuButton = document.querySelector('.menu-button');
-            const dropdown = document.getElementById('coffeeMenuDropdown');
-            
-            if (!menuButton.contains(e.target) && !dropdown.contains(e.target)) {
-                closeCoffeeMenu();
             }
         });
     </script>
