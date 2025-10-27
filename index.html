@@ -220,7 +220,7 @@
         .miel { background: linear-gradient(180deg, #fff8e1 0%, #ffcc80 25%, #ffa726 50%, #8d6e63 75%, #5d4037 100%); }
         .especial { background: linear-gradient(180deg, #ffffff 0%, #fff8e1 20%, #ffcc80 40%, #d7940c 60%, #8d6e63 80%, #5d4037 100%); }
         
-        /* Botón de menú de cafés */
+        /* Botón de menú de cafés - solo en móvil */
         .menu-button {
             position: fixed;
             top: 20px;
@@ -232,13 +232,19 @@
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            font-size: 20px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
-            display: flex;
+            display: none; /* Oculto por defecto */
             align-items: center;
             justify-content: center;
+            padding: 0;
+        }
+        
+        .menu-button img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1); /* Hace la imagen blanca */
         }
         
         .menu-button:hover {
@@ -341,6 +347,11 @@
             
             .subtitle {
                 font-size: 0.9em;
+            }
+            
+            /* Mostrar botón de menú solo en móvil */
+            .menu-button {
+                display: flex;
             }
         }
         
@@ -452,8 +463,10 @@
     </style>
 </head>
 <body>
-    <!-- Botón de menú de cafés -->
-    <button class="menu-button" onclick="toggleCoffeeMenu()">📍</button>
+    <!-- Botón de menú de cafés - solo móvil -->
+    <button class="menu-button" onclick="toggleCoffeeMenu()">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E" alt="Menú">
+    </button>
     
     <!-- Menú desplegable de cafés -->
     <div id="coffeeMenuDropdown" class="coffee-menu-dropdown">
