@@ -189,6 +189,13 @@
             overflow: hidden;
         }
         
+        .coffee-image-real {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
         .coffee-gradient {
             width: 100%;
             height: 100%;
@@ -244,6 +251,52 @@
         }
         
         @media (max-width: 600px) {
+            /* Hamburger menu responsive */
+            .hamburger-menu {
+                top: 15px;
+                left: 15px;
+                padding: 8px;
+                border-radius: 6px;
+            }
+            
+            .hamburger-icon {
+                width: 20px;
+                height: 15px;
+            }
+            
+            .hamburger-line {
+                height: 2.5px;
+            }
+            
+            /* Menu content responsive */
+            .menu-content {
+                padding: 20px;
+                margin: 10px;
+                max-width: none;
+                width: calc(100% - 20px);
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+            
+            .menu-title {
+                font-size: 1.3em;
+            }
+            
+            .menu-section {
+                margin-bottom: 15px;
+            }
+            
+            .menu-section h3 {
+                font-size: 1.1em;
+                margin-bottom: 6px;
+            }
+            
+            .menu-section p {
+                font-size: 0.9em;
+                margin: 3px 0;
+            }
+            
+            /* Recipe modal responsive */
             .modal-body-content {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -301,6 +354,79 @@
             .card p {
                 font-size: 0.9em;
                 line-height: 1.4;
+            }
+        }
+
+        /* Estilos para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            /* Hamburger menu para pantallas pequeñas */
+            .hamburger-menu {
+                top: 10px;
+                left: 10px;
+                padding: 6px;
+            }
+            
+            .hamburger-icon {
+                width: 18px;
+                height: 14px;
+            }
+            
+            .hamburger-line {
+                height: 2px;
+            }
+            
+            /* Menu content para pantallas pequeñas */
+            .menu-content {
+                padding: 15px;
+                margin: 5px;
+                width: calc(100% - 10px);
+                max-height: 90vh;
+                border-radius: 10px;
+            }
+            
+            .menu-header {
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .menu-title {
+                font-size: 1.2em;
+            }
+            
+            .menu-close {
+                width: 30px;
+                height: 30px;
+                font-size: 20px;
+            }
+            
+            .menu-section {
+                margin-bottom: 12px;
+            }
+            
+            .menu-section h3 {
+                font-size: 1em;
+                margin-bottom: 5px;
+            }
+            
+            .menu-section p {
+                font-size: 0.85em;
+                line-height: 1.3;
+            }
+            
+            /* Mejorar toque en enlaces de móvil */
+            .menu-section a {
+                padding: 2px 4px;
+                border-radius: 3px;
+                display: inline-block;
+                min-height: 44px;
+                line-height: 1.4;
+                text-align: center;
+            }
+            
+            /* Una sola columna en pantallas muy pequeñas */
+            .menu {
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
         }
         
@@ -409,9 +535,168 @@
             color: #6d4c41;
             font-style: italic;
         }
+
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: rgba(62, 39, 35, 0.9);
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hamburger-menu:hover {
+            background-color: rgba(62, 39, 35, 1);
+            transform: scale(1.1);
+        }
+        
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            width: 24px;
+            height: 18px;
+            justify-content: space-between;
+        }
+        
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Menu Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        .menu-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: menuFadeIn 0.3s ease-out;
+        }
+        
+        .menu-content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: menuSlideIn 0.3s ease-out;
+        }
+        
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d7ccc8;
+        }
+        
+        .menu-title {
+            color: #6d4c41;
+            font-size: 1.5em;
+            margin: 0;
+        }
+        
+        .menu-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6d4c41;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .menu-close:hover {
+            background-color: #f5e6d3;
+            transform: scale(1.1);
+        }
+        
+        .menu-section {
+            margin-bottom: 20px;
+        }
+        
+        .menu-section h3 {
+            color: #6d4c41;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .menu-section p {
+            color: #5d4037;
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        
+        .menu-section a {
+            color: #6d4c41;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .menu-section a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes menuFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes menuSlideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger-menu" onclick="openInfoMenu()">
+        <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+    </button>
 
     <header>
         <div class="logo">
@@ -539,6 +824,7 @@
                         <div id="modalDetails"></div>
                     </div>
                     <div class="modal-image">
+                        <img id="coffeeImage" class="coffee-image-real" src="" alt="Imagen del café" style="display: none;">
                         <div id="coffeeGradient" class="coffee-gradient"></div>
                     </div>
                 </div>
@@ -546,8 +832,62 @@
         </div>
     </div>
 
+    <!-- Info Menu Overlay -->
+    <div id="infoMenuOverlay" class="menu-overlay">
+        <div class="menu-content">
+            <div class="menu-header">
+                <h2 class="menu-title">Información</h2>
+                <button class="menu-close" onclick="closeInfoMenu()">&times;</button>
+            </div>
+            
+            <div class="menu-section">
+                <h3>📍 Ubicación</h3>
+                <p>Calle Principal #123</p>
+                <p>Centro Histórico</p>
+                <p>Ciudad de México, CDMX</p>
+                <p><a href="https://maps.google.com" target="_blank">Ver en Google Maps</a></p>
+            </div>
+            
+            <div class="menu-section">
+                <h3>📞 Contacto</h3>
+                <p><a href="tel:+525555123456">+52 55 5512 3456</a></p>
+                <p><a href="mailto:info@cafeteriagonzalez.com">info@cafeteriagonzalez.com</a></p>
+            </div>
+            
+            <div class="menu-section">
+                <h3>💰 Precios</h3>
+                <p><strong>Cafés Básicos:</strong> $35 - $45</p>
+                <p><strong>Cafés Especiales:</strong> $50 - $65</p>
+                <p><strong>Cafés Premium:</strong> $70 - $85</p>
+                <p><strong>Postres (Affogato):</strong> $75</p>
+            </div>
+            
+            <div class="menu-section">
+                <h3>🕒 Horarios</h3>
+                <p><strong>Lunes a Viernes:</strong> 7:00 AM - 9:00 PM</p>
+                <p><strong>Sábados:</strong> 8:00 AM - 10:00 PM</p>
+                <p><strong>Domingos:</strong> 9:00 AM - 8:00 PM</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Mapeo de clases CSS para cada tipo de café
+        // Mapeo de imágenes reales para cada tipo de café
+        const coffeeImages = {
+            'Espresso': 'images/espresso-coffee.webp',
+            'Café con leche': 'images/cafe-con-leche.avif',
+            'Capuchino': 'images/capuchino.avif',
+            'Latte Macchiato': 'images/Latte-Macchiato-768x768-1.jpg',
+            'Bombón': 'images/bonbon.jpeg',
+            'Mocha': 'images/16- mocha.jpg',
+            'Flat White': 'images/flat white.webp',
+            'Cortado': 'images/cortado.jpeg',
+            'Affogato': 'images/afogatto.jpeg',
+            'Café Moka Italiano': 'images/16- mocha.jpg',
+            'Latte Italiano': 'images/16- mocha.jpg'
+        };
+        
+        // Mapeo de clases CSS para cada tipo de café (fallback)
         const coffeeGradients = {
             'Espresso': 'espresso',
             'Café con leche': 'cafe-con-leche',
@@ -589,13 +929,26 @@
             
             document.getElementById('modalDetails').innerHTML = detailsHTML;
             
-            // Configurar el gradiente del café
+            // Configurar imagen o gradiente del café
+            const coffeeImage = document.getElementById('coffeeImage');
             const coffeeGradient = document.getElementById('coffeeGradient');
-            // Limpiar clases anteriores
-            coffeeGradient.className = 'coffee-gradient';
-            // Añadir la clase específica del café
-            const gradientClass = coffeeGradients[title] || 'espresso';
-            coffeeGradient.classList.add(gradientClass);
+            
+            // Verificar si existe imagen real para este café
+            if (coffeeImages[title]) {
+                // Mostrar imagen real
+                coffeeImage.src = coffeeImages[title];
+                coffeeImage.style.display = 'block';
+                coffeeGradient.style.display = 'none';
+            } else {
+                // Usar gradiente como fallback
+                coffeeImage.style.display = 'none';
+                coffeeGradient.style.display = 'block';
+                // Limpiar clases anteriores
+                coffeeGradient.className = 'coffee-gradient';
+                // Añadir la clase específica del café
+                const gradientClass = coffeeGradients[title] || 'espresso';
+                coffeeGradient.classList.add(gradientClass);
+            }
             
             document.getElementById('recipeModal').classList.add('show');
             document.body.style.overflow = 'hidden';
@@ -617,6 +970,25 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
+                closeInfoMenu();
+            }
+        });
+
+        // Funciones para el menú de información
+        function openInfoMenu() {
+            document.getElementById('infoMenuOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeInfoMenu() {
+            document.getElementById('infoMenuOverlay').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Cerrar menú info al hacer clic fuera del contenido
+        document.getElementById('infoMenuOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeInfoMenu();
             }
         });
     </script>
