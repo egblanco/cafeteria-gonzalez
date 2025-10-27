@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a static HTML website for "Cafetería Gonzales", a coffee shop menu website written entirely in Spanish. The project consists of a single `index.html` file that displays an interactive coffee menu with detailed recipes and preparation instructions.
+This is a static HTML website for "Cafetería González", a coffee shop menu website written entirely in Spanish. The project consists of a single `index.html` file that displays an interactive coffee menu with detailed recipes and preparation instructions.
 
 ## Architecture
 

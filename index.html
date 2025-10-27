@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafetería Gonzales</title>
+    <title>Cafetería González</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
     <style>
         * {
@@ -220,6 +220,89 @@
         .miel { background: linear-gradient(180deg, #fff8e1 0%, #ffcc80 25%, #ffa726 50%, #8d6e63 75%, #5d4037 100%); }
         .especial { background: linear-gradient(180deg, #ffffff 0%, #fff8e1 20%, #ffcc80 40%, #d7940c 60%, #8d6e63 80%, #5d4037 100%); }
         
+        /* Botón de menú de cafés */
+        .menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: #6d4c41;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .menu-button:hover {
+            background-color: #5d4037;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Menú desplegable de cafés */
+        .coffee-menu-dropdown {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 1000;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            min-width: 250px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .coffee-menu-dropdown.show {
+            display: block;
+        }
+        
+        .coffee-menu-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #d7ccc8;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            color: #5d4037;
+        }
+        
+        .coffee-menu-item:hover {
+            background-color: #f5e6d3;
+        }
+        
+        .coffee-menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .coffee-menu-header {
+            padding: 16px;
+            background-color: #6d4c41;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         @media (max-width: 600px) {
             .modal-body-content {
                 grid-template-columns: 1fr;
@@ -369,61 +452,79 @@
     </style>
 </head>
 <body>
+    <!-- Botón de menú de cafés -->
+    <button class="menu-button" onclick="toggleCoffeeMenu()">📍</button>
+    
+    <!-- Menú desplegable de cafés -->
+    <div id="coffeeMenuDropdown" class="coffee-menu-dropdown">
+        <div class="coffee-menu-header">☕ Menú de Cafés</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Espresso')">Espresso</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Café con leche')">Café con leche</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Capuchino')">Capuchino</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Latte Macchiato')">Latte Macchiato</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Bombón')">Bombón</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Mocha')">Mocha</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Flat White')">Flat White</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Cortado')">Cortado</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Miel')">Miel</div>
+        <div class="coffee-menu-item" onclick="scrollToCard('Especial 1 – Latte Macchiato Miel y Canela')">Especial 1 – Latte Macchiato Miel y Canela</div>
+    </div>
+
     <header>
         <div class="logo">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%233e2723' d='M256 80c-44.2 0-80 35.8-80 80 0 16.8 5.2 32.4 14.1 45.3l65.9 131.7 65.9-131.7c8.9-12.9 14.1-28.5 14.1-45.3 0-44.2-35.8-80-80-80zm0 240l-80 80v32h160v-32l-80-80zm-128 112v32h256v-32H128z'/%3E%3Cpath fill='%233e2723' d='M256 120c-22.1 0-40 17.9-40 40s17.9 40 40 40 40-17.9 40-40-17.9-40-40-40z'/%3E%3C/svg%3E" alt="Logo Cafetería Gonzales">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%233e2723' d='M256 80c-44.2 0-80 35.8-80 80 0 16.8 5.2 32.4 14.1 45.3l65.9 131.7 65.9-131.7c8.9-12.9 14.1-28.5 14.1-45.3 0-44.2-35.8-80-80-80zm0 240l-80 80v32h160v-32l-80-80zm-128 112v32h256v-32H128z'/%3E%3Cpath fill='%233e2723' d='M256 120c-22.1 0-40 17.9-40 40s17.9 40 40 40 40-17.9 40-40-17.9-40-40-40z'/%3E%3C/svg%3E" alt="Logo Cafetería González">
         </div>
         <h1>☕ Cafetería González ☕</h1>
         <p class="subtitle">El mejor café artesanal de la ciudad</p>
     </header>
 
     <div class="menu">
-        <div class="card" onclick="openModal('Espresso', 'Café corto e intenso, pura esencia del grano.', 'Café molido: 7-9 gramos|Agua: 25-30 ml|Azúcar: al gusto (0-5 gramos)', 'Calienta la máquina de espresso|Muele el café fino y colócalo en el portafiltro|Presiona firmemente el café|Extrae durante 25-30 segundos|Sirve inmediatamente')">
+        <div id="card-Espresso" class="card" onclick="openModal('Espresso', 'Café corto e intenso, pura esencia del grano.', 'Café molido: 7-9 gramos|Agua: 25-30 ml|Azúcar: al gusto (0-5 gramos)', 'Calienta la máquina de espresso|Muele el café fino y colócalo en el portafiltro|Presiona firmemente el café|Extrae durante 25-30 segundos|Sirve inmediatamente')">
             <h2>Espresso</h2>
             <p>Café corto e intenso, pura esencia del grano.</p>
         </div>
 
-        <div class="card" onclick="openModal('Café con leche', 'Clásico balance entre espresso y leche caliente.', 'Café molido: 7-9 gramos|Leche: 150 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Prepara un espresso|Calienta la leche sin que hierva (60-65°C)|Vierte el espresso en una taza grande|Añade la leche caliente|Agrega azúcar al gusto y revuelve')">
+        <div id="card-Café con leche" class="card" onclick="openModal('Café con leche', 'Clásico balance entre espresso y leche caliente.', 'Café molido: 7-9 gramos|Leche: 150 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Prepara un espresso|Calienta la leche sin que hierva (60-65°C)|Vierte el espresso en una taza grande|Añade la leche caliente|Agrega azúcar al gusto y revuelve')">
             <h2>Café con leche</h2>
             <p>Clásico balance entre espresso y leche caliente.</p>
         </div>
 
-        <div class="card" onclick="openModal('Capuchino', 'Espresso con leche espumada, textura suave y cremosa.', 'Café molido: 7-9 gramos|Leche: 120 ml|Agua: 30 ml|Azúcar: al gusto (0-8 gramos)|Canela en polvo: opcional', 'Prepara un espresso|Vaporiza la leche hasta crear espuma cremosa|Vierte el espresso en una taza|Añade la leche con movimiento circular|Completa con espuma|Espolvorea canela si deseas')">
+        <div id="card-Capuchino" class="card" onclick="openModal('Capuchino', 'Espresso con leche espumada, textura suave y cremosa.', 'Café molido: 7-9 gramos|Leche: 120 ml|Agua: 30 ml|Azúcar: al gusto (0-8 gramos)|Canela en polvo: opcional', 'Prepara un espresso|Vaporiza la leche hasta crear espuma cremosa|Vierte el espresso en una taza|Añade la leche con movimiento circular|Completa con espuma|Espolvorea canela si deseas')">
             <h2>Capuchino</h2>
             <p>Espresso con leche espumada, textura suave y cremosa.</p>
         </div>
 
-        <div class="card" onclick="openModal('Latte Macchiato', 'Leche caliente con un toque delicado de espresso.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Vaporiza la leche creando buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Vierte lentamente el espresso sobre la leche|Se formarán 3 capas: leche, café, espuma')">
+        <div id="card-Latte Macchiato" class="card" onclick="openModal('Latte Macchiato', 'Leche caliente con un toque delicado de espresso.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Vaporiza la leche creando buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Vierte lentamente el espresso sobre la leche|Se formarán 3 capas: leche, café, espuma')">
             <h2>Latte Macchiato</h2>
             <p>Leche caliente con un toque delicado de espresso.</p>
         </div>
 
-        <div class="card" onclick="openModal('Bombón', 'Espresso con leche condensada, dulce y reconfortante.', 'Café molido: 7-9 gramos|Leche condensada: 30-40 ml|Agua: 30 ml|Espuma de leche: opcional (para decorar)|Azúcar: no necesita (la leche condensada es dulce)', 'Vierte la leche condensada en un vaso de vidrio|Prepara un espresso|Vierte el espresso cuidadosamente sobre la leche condensada|Se formará una bonita capa doble|Opcionalmente, corona con espuma de leche|Revuelve antes de beber')">
+        <div id="card-Bombón" class="card" onclick="openModal('Bombón', 'Espresso con leche condensada, dulce y reconfortante.', 'Café molido: 7-9 gramos|Leche condensada: 30-40 ml|Agua: 30 ml|Espuma de leche: opcional (para decorar)|Azúcar: no necesita (la leche condensada es dulce)', 'Vierte la leche condensada en un vaso de vidrio|Prepara un espresso|Vierte el espresso cuidadosamente sobre la leche condensada|Se formará una bonita capa doble|Opcionalmente, corona con espuma de leche|Revuelve antes de beber')">
             <h2>Bombón</h2>
             <p>Espresso con leche condensada, dulce y reconfortante.</p>
         </div>
 
-        <div class="card" onclick="openModal('Mocha', 'Combinación deliciosa de café, leche y chocolate.', 'Café molido: 7-9 gramos|Leche: 150 ml|Chocolate o cacao: 15-20 gramos|Agua: 30 ml|Azúcar: 5-10 gramos|Crema batida: opcional', 'Derrite el chocolate con un poco de leche caliente|Prepara un espresso|Mezcla el chocolate derretido con el espresso|Vaporiza el resto de la leche|Vierte la leche en la mezcla|Decora con crema batida y cacao en polvo')">
+        <div id="card-Mocha" class="card" onclick="openModal('Mocha', 'Combinación deliciosa de café, leche y chocolate.', 'Café molido: 7-9 gramos|Leche: 150 ml|Chocolate o cacao: 15-20 gramos|Agua: 30 ml|Azúcar: 5-10 gramos|Crema batida: opcional', 'Derrite el chocolate con un poco de leche caliente|Prepara un espresso|Mezcla el chocolate derretido con el espresso|Vaporiza el resto de la leche|Vierte la leche en la mezcla|Decora con crema batida y cacao en polvo')">
             <h2>Mocha</h2>
             <p>Combinación deliciosa de café, leche y chocolate.</p>
         </div>
 
-        <div class="card" onclick="openModal('Flat White', 'Suave microespuma y sabor concentrado de café.', 'Café molido: 14-18 gramos (doble shot)|Leche: 120 ml|Agua: 60 ml|Azúcar: al gusto (0-8 gramos)', 'Prepara un espresso doble|Vaporiza la leche creando microespuma (burbujas muy finas)|Vierte el espresso en una taza|Añade la leche con técnica de latte art|La capa de espuma debe ser delgada (0.5 cm)')">
+        <div id="card-Flat White" class="card" onclick="openModal('Flat White', 'Suave microespuma y sabor concentrado de café.', 'Café molido: 14-18 gramos (doble shot)|Leche: 120 ml|Agua: 60 ml|Azúcar: al gusto (0-8 gramos)', 'Prepara un espresso doble|Vaporiza la leche creando microespuma (burbujas muy finas)|Vierte el espresso en una taza|Añade la leche con técnica de latte art|La capa de espuma debe ser delgada (0.5 cm)')">
             <h2>Flat White</h2>
             <p>Suave microespuma y sabor concentrado de café.</p>
         </div>
 
-        <div class="card" onclick="openModal('Cortado', 'Espresso suavizado con un toque de leche caliente.', 'Café molido: 7-9 gramos|Leche: 30-40 ml|Agua: 30 ml|Azúcar: al gusto (0-5 gramos)', 'Prepara un espresso en una taza pequeña|Calienta una pequeña cantidad de leche|Añade la leche al espresso|Corta el sabor fuerte del café|Sirve en taza pequeña tipo cortado')">
+        <div id="card-Cortado" class="card" onclick="openModal('Cortado', 'Espresso suavizado con un toque de leche caliente.', 'Café molido: 7-9 gramos|Leche: 30-40 ml|Agua: 30 ml|Azúcar: al gusto (0-5 gramos)', 'Prepara un espresso en una taza pequeña|Calienta una pequeña cantidad de leche|Añade la leche al espresso|Corta el sabor fuerte del café|Sirve en taza pequeña tipo cortado')">
             <h2>Cortado</h2>
             <p>Espresso suavizado con un toque de leche caliente.</p>
         </div>
 
-        <div class="card" onclick="openModal('Miel', 'Añadido dulce y aromático que encanta el paladar.', 'Café molido: 7-9 gramos|Agua: 30 ml|Miel: 10-15 gramos|Leche: 100 ml (opcional)', 'Prepara un espresso|Añade la miel al café caliente|Revuelve bien hasta disolver completamente|Si deseas, añade leche vaporizada|Disfruta del dulzor natural de la miel')">
+        <div id="card-Miel" class="card" onclick="openModal('Miel', 'Añadido dulce y aromático que encanta el paladar.', 'Café molido: 7-9 gramos|Agua: 30 ml|Miel: 10-15 gramos|Leche: 100 ml (opcional)', 'Prepara un espresso|Añade la miel al café caliente|Revuelve bien hasta disolver completamente|Si deseas, añade leche vaporizada|Disfruta del dulzor natural de la miel')">
             <h2>Miel</h2>
             <p>Añadido dulce y aromático que encanta el paladar.</p>
         </div>
 
-        <div class="card" onclick="openModal('Especial 1 – Latte Macchiato Miel y Canela', 'Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Miel: 15-20 gramos|Esencia de vainilla: 2-3 gotas|Canela en polvo: 1-2 gramos', 'Mezcla la miel con las gotas de vainilla|Vaporiza la leche hasta crear buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Añade la mezcla de miel y vainilla al espresso|Vierte lentamente el espresso sobre la leche|Espolvorea canela en la parte superior|Sirve con una cucharita para mezclar al gusto')">
+        <div id="card-Especial 1 – Latte Macchiato Miel y Canela" class="card" onclick="openModal('Especial 1 – Latte Macchiato Miel y Canela', 'Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Miel: 15-20 gramos|Esencia de vainilla: 2-3 gotas|Canela en polvo: 1-2 gramos', 'Mezcla la miel con las gotas de vainilla|Vaporiza la leche hasta crear buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Añade la mezcla de miel y vainilla al espresso|Vierte lentamente el espresso sobre la leche|Espolvorea canela en la parte superior|Sirve con una cucharita para mezclar al gusto')">
             <h2>Especial 1 – Latte Macchiato Miel y Canela</h2>
             <p>Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.</p>
         </div>
@@ -519,6 +620,44 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
+                closeCoffeeMenu();
+            }
+        });
+        
+        // Funciones para el menú de cafés
+        function toggleCoffeeMenu() {
+            const dropdown = document.getElementById('coffeeMenuDropdown');
+            dropdown.classList.toggle('show');
+        }
+        
+        function closeCoffeeMenu() {
+            const dropdown = document.getElementById('coffeeMenuDropdown');
+            dropdown.classList.remove('show');
+        }
+        
+        function scrollToCard(coffeeName) {
+            const cardId = 'card-' + coffeeName;
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Cerrar el menú después de hacer scroll
+                closeCoffeeMenu();
+                // Efecto de resaltado temporal
+                card.style.transform = 'scale(1.05)';
+                card.style.transition = 'transform 0.3s ease';
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 1000);
+            }
+        }
+        
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', function(e) {
+            const menuButton = document.querySelector('.menu-button');
+            const dropdown = document.getElementById('coffeeMenuDropdown');
+            
+            if (!menuButton.contains(e.target) && !dropdown.contains(e.target)) {
+                closeCoffeeMenu();
             }
         });
     </script>
