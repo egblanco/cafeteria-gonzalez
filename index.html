@@ -1231,6 +1231,40 @@
             font-size: 14px;
         }
 
+        /* Coffee Category Labels */
+        .category-label {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .category-basico {
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: white;
+        }
+
+        .category-especial {
+            background: linear-gradient(135deg, #ff9800, #ffb74d);
+            color: white;
+        }
+
+        .category-premium {
+            background: linear-gradient(135deg, #9c27b0, #ba68c8);
+            color: white;
+        }
+
+        .card {
+            position: relative;
+        }
+
         /* Responsive login styles */
         @media (max-width: 600px) {
             .login-btn {
@@ -1313,6 +1347,7 @@
 
     <div class="menu">
         <div id="card-Espresso" class="card" onclick="openModal('Espresso', 'Café corto e intenso, pura esencia del grano.', 'Café molido: 7-9 gramos|Agua: 25-30 ml|Azúcar: al gusto (0-5 gramos)', 'Calienta la máquina de espresso|Muele el café fino y colócalo en el portafiltro|Presiona firmemente el café|Extrae durante 25-30 segundos|Sirve inmediatamente')">
+            <div class="category-label category-basico">BÁSICO</div>
             <div class="card-header">
                 <h2>Espresso</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Espresso')" data-coffee="Espresso">
@@ -1323,6 +1358,7 @@
         </div>
 
         <div id="card-Café con leche" class="card" onclick="openModal('Café con leche', 'Clásico balance entre espresso y leche caliente.', 'Café molido: 7-9 gramos|Leche: 150 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Prepara un espresso|Calienta la leche sin que hierva (60-65°C)|Vierte el espresso en una taza grande|Añade la leche caliente|Agrega azúcar al gusto y revuelve')">
+            <div class="category-label category-basico">BÁSICO</div>
             <div class="card-header">
                 <h2>Café con leche</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Café con leche')" data-coffee="Café con leche">
@@ -1333,6 +1369,7 @@
         </div>
 
         <div id="card-Capuchino" class="card" onclick="openModal('Capuchino', 'Espresso con leche espumada, textura suave y cremosa.', 'Café molido: 7-9 gramos|Leche: 120 ml|Agua: 30 ml|Azúcar: al gusto (0-8 gramos)|Canela en polvo: opcional', 'Prepara un espresso|Vaporiza la leche hasta crear espuma cremosa|Vierte el espresso en una taza|Añade la leche con movimiento circular|Completa con espuma|Espolvorea canela si deseas')">
+            <div class="category-label category-basico">BÁSICO</div>
             <div class="card-header">
                 <h2>Capuchino</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Capuchino')" data-coffee="Capuchino">
@@ -1343,6 +1380,7 @@
         </div>
 
         <div id="card-Latte Macchiato" class="card" onclick="openModal('Latte Macchiato', 'Leche caliente con un toque delicado de espresso.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Vaporiza la leche creando buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Vierte lentamente el espresso sobre la leche|Se formarán 3 capas: leche, café, espuma')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Latte Macchiato</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Latte Macchiato')" data-coffee="Latte Macchiato">
@@ -1353,6 +1391,7 @@
         </div>
 
         <div id="card-Bombón" class="card" onclick="openModal('Bombón', 'Espresso con leche condensada, dulce y reconfortante.', 'Café molido: 7-9 gramos|Leche condensada: 30-40 ml|Agua: 30 ml|Espuma de leche: opcional (para decorar)|Azúcar: no necesita (la leche condensada es dulce)', 'Vierte la leche condensada en un vaso de vidrio|Prepara un espresso|Vierte el espresso cuidadosamente sobre la leche condensada|Se formará una bonita capa doble|Opcionalmente, corona con espuma de leche|Revuelve antes de beber')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Bombón</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Bombón')" data-coffee="Bombón">
@@ -1363,6 +1402,7 @@
         </div>
 
         <div id="card-Mocha" class="card" onclick="openModal('Mocha', 'Combinación deliciosa de café, leche y chocolate.', 'Café molido: 7-9 gramos|Leche: 150 ml|Chocolate o cacao: 15-20 gramos|Agua: 30 ml|Azúcar: 5-10 gramos|Crema batida: opcional', 'Derrite el chocolate con un poco de leche caliente|Prepara un espresso|Mezcla el chocolate derretido con el espresso|Vaporiza el resto de la leche|Vierte la leche en la mezcla|Decora con crema batida y cacao en polvo')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Mocha</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Mocha')" data-coffee="Mocha">
@@ -1373,6 +1413,7 @@
         </div>
 
         <div id="card-Flat White" class="card" onclick="openModal('Flat White', 'Suave microespuma y sabor concentrado de café.', 'Café molido: 14-18 gramos (doble shot)|Leche: 120 ml|Agua: 60 ml|Azúcar: al gusto (0-8 gramos)', 'Prepara un espresso doble|Vaporiza la leche creando microespuma (burbujas muy finas)|Vierte el espresso en una taza|Añade la leche con técnica de latte art|La capa de espuma debe ser delgada (0.5 cm)')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Flat White</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Flat White')" data-coffee="Flat White">
@@ -1383,6 +1424,7 @@
         </div>
 
         <div id="card-Cortado" class="card" onclick="openModal('Cortado', 'Espresso suavizado con un toque de leche caliente.', 'Café molido: 7-9 gramos|Leche: 30-40 ml|Agua: 30 ml|Azúcar: al gusto (0-5 gramos)', 'Prepara un espresso en una taza pequeña|Calienta una pequeña cantidad de leche|Añade la leche al espresso|Corta el sabor fuerte del café|Sirve en taza pequeña tipo cortado')">
+            <div class="category-label category-basico">BÁSICO</div>
             <div class="card-header">
                 <h2>Cortado</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Cortado')" data-coffee="Cortado">
@@ -1393,6 +1435,7 @@
         </div>
 
         <div id="card-Miel" class="card" onclick="openModal('Miel', 'Añadido dulce y aromático que encanta el paladar.', 'Café molido: 7-9 gramos|Agua: 30 ml|Miel: 10-15 gramos|Leche: 100 ml (opcional)', 'Prepara un espresso|Añade la miel al café caliente|Revuelve bien hasta disolver completamente|Si deseas, añade leche vaporizada|Disfruta del dulzor natural de la miel')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Miel</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Miel')" data-coffee="Miel">
@@ -1403,6 +1446,7 @@
         </div>
 
         <div id="card-Especial 1 – Latte Macchiato Miel y Canela" class="card" onclick="openModal('Especial 1 – Latte Macchiato Miel y Canela', 'Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Miel: 15-20 gramos|Esencia de vainilla: 2-3 gotas|Canela en polvo: 1-2 gramos', 'Mezcla la miel con las gotas de vainilla|Vaporiza la leche hasta crear buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Añade la mezcla de miel y vainilla al espresso|Vierte lentamente el espresso sobre la leche|Espolvorea canela en la parte superior|Sirve con una cucharita para mezclar al gusto')">
+            <div class="category-label category-premium">PREMIUM</div>
             <div class="card-header">
                 <h2>Especial 1 – Latte Macchiato Miel y Canela</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Especial 1 – Latte Macchiato Miel y Canela')" data-coffee="Especial 1 – Latte Macchiato Miel y Canela">
@@ -1413,6 +1457,7 @@
         </div>
 
         <div id="card-Café Moka Italiano" class="card" onclick="openModal('Café Moka Italiano', 'Café intenso preparado con cafetera italiana tradicional.', 'Café molido medio-fino|Agua|Azúcar: opcional', 'Llena la base con agua hasta la válvula|Coloca el café molido en el filtro sin presionar|Enrosca la cafetera y pon a fuego medio|Retira del fuego cuando empiece a salir café|Sirve caliente inmediatamente')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Café Moka Italiano</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Café Moka Italiano')" data-coffee="Café Moka Italiano">
@@ -1423,6 +1468,7 @@
         </div>
 
         <div id="card-Latte Italiano" class="card" onclick="openModal('Latte Italiano', 'Cremoso latte con base de café moka italiano.', 'Café de moka italiano|Leche para vaporizar|Espuma ligera', 'Prepara café moka italiano|Vaporiza la leche creando espuma ligera|Vierte la leche vaporizada sobre el café|Corona con una ligera capa de espuma|Sirve inmediatamente')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Latte Italiano</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Latte Italiano')" data-coffee="Latte Italiano">
@@ -1433,6 +1479,7 @@
         </div>
 
         <div id="card-Café Miel y Canela Moka" class="card" onclick="openModal('Café Miel y Canela Moka', 'Café moka endulzado naturalmente con miel y canela.', 'Café de moka italiano|1 cucharadita de miel|Una pizca de canela|Leche caliente: opcional', 'Prepara café moka italiano|Mezcla la miel con el café caliente hasta disolver|Espolvorea canela al gusto|Añade leche caliente si deseas|Revuelve y disfruta del aroma')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Café Miel y Canela Moka</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Café Miel y Canela Moka')" data-coffee="Café Miel y Canela Moka">
@@ -1443,6 +1490,7 @@
         </div>
 
         <div id="card-Café Filtrado Clásico" class="card" onclick="openModal('Café Filtrado Clásico', 'Café tradicional de cafetera de filtro, suave y aromático.', 'Café molido medio|Agua filtrada|Azúcar o leche: opcional', 'Coloca el filtro en la cafetera|Añade café molido (1 cucharada por taza)|Vierte agua fría en el depósito|Enciende la cafetera y espera|Sirve negro o con un toque de leche')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Café Filtrado Clásico</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Café Filtrado Clásico')" data-coffee="Café Filtrado Clásico">
@@ -1453,6 +1501,7 @@
         </div>
 
         <div id="card-Café de Vainilla" class="card" onclick="openModal('Café de Vainilla', 'Café filtrado con delicioso aroma de vainilla.', 'Café filtrado|Esencia de vainilla (2-3 gotas)|Leche: opcional|Azúcar: al gusto', 'Prepara café filtrado normal|Añade gotas de esencia de vainilla|Mezcla bien para distribuir el sabor|Agrega leche si deseas|Endulza al gusto')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Café de Vainilla</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Café de Vainilla')" data-coffee="Café de Vainilla">
@@ -1463,6 +1512,7 @@
         </div>
 
         <div id="card-Café con Chocolate" class="card" onclick="openModal('Café con Chocolate', 'Café filtrado con rico sabor a chocolate.', 'Café filtrado|Cacao en polvo o sirope de chocolate|Leche caliente|Azúcar: al gusto', 'Prepara café filtrado|Mezcla cacao en polvo o sirope con el café|Añade leche caliente al gusto|Revuelve hasta integrar completamente|Endulza si es necesario')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Café con Chocolate</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Café con Chocolate')" data-coffee="Café con Chocolate">
@@ -1473,6 +1523,7 @@
         </div>
 
         <div id="card-Capuchino Fácil" class="card" onclick="openModal('Capuchino Fácil', 'Capuchino casero con cualquier tipo de café concentrado.', 'Café concentrado (moka o filtrado fuerte)|Leche para vaporizar|Cacao o canela en polvo', 'Prepara café concentrado|Vaporiza la leche hasta crear espuma|Vierte el café en una taza|Añade la leche vaporizada|Espolvorea cacao o canela encima')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Capuchino Fácil</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Capuchino Fácil')" data-coffee="Capuchino Fácil">
@@ -1483,6 +1534,7 @@
         </div>
 
         <div id="card-Affogato" class="card" onclick="openModal('Affogato', 'Postre italiano de helado bañado en café caliente.', 'Café caliente concentrado (moka o filtrado fuerte)|1 bola de helado de vainilla|Opcional: galleta o bizcocho', 'Coloca una bola de helado de vainilla en una copa|Prepara café caliente y concentrado|Vierte el café caliente sobre el helado|Sirve inmediatamente con cucharita|Acompaña con galleta si deseas')">
+            <div class="category-label category-premium">PREMIUM</div>
             <div class="card-header">
                 <h2>Affogato</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Affogato')" data-coffee="Affogato">
@@ -1493,6 +1545,7 @@
         </div>
 
         <div id="card-Café Frío Casero" class="card" onclick="openModal('Café Frío Casero', 'Refrescante café frío estilo cold brew casero.', 'Café preparado (enfriado)|Hielo abundante|Leche fría o esencia de vainilla|Azúcar o edulcorante', 'Prepara café con cafetera normal|Deja enfriar completamente|Llena un vaso con hielo|Vierte el café frío sobre el hielo|Añade leche fría o vainilla al gusto')">
+            <div class="category-label category-especial">ESPECIAL</div>
             <div class="card-header">
                 <h2>Café Frío Casero</h2>
                 <button class="like-btn" onclick="toggleLike(event, 'Café Frío Casero')" data-coffee="Café Frío Casero">
