@@ -851,6 +851,242 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
+        /* User Account Dropdown Styles */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            z-index: 1002;
+            padding: 8px 0;
+            margin-top: 5px;
+            border: 1px solid #d7ccc8;
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: dropdownSlideIn 0.3s ease-out;
+        }
+
+        .dropdown-item {
+            color: #5d4037;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-family: 'Georgia', serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f5e6d3;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: #d7ccc8;
+            margin: 8px 0;
+        }
+
+        .user-info {
+            padding: 12px 20px;
+            border-bottom: 1px solid #d7ccc8;
+            color: #6d4c41;
+            font-size: 12px;
+        }
+
+        .user-email {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        @keyframes dropdownSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Profile Modal Styles */
+        .profile-modal-content {
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-section {
+            border-bottom: 1px solid #d7ccc8;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .profile-section h3 {
+            color: #6d4c41;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .input-group {
+            flex: 1;
+        }
+
+        .save-btn, .cancel-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+        }
+
+        .save-btn {
+            background-color: #6d4c41;
+            color: white;
+            border: none;
+        }
+
+        .save-btn:hover {
+            background-color: #5d4037;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .cancel-btn {
+            background-color: transparent;
+            color: #6d4c41;
+            border: 2px solid #6d4c41;
+        }
+
+        .cancel-btn:hover {
+            background-color: #f5e6d3;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        /* Orders Modal Styles */
+        .orders-modal-content {
+            max-width: 700px;
+            width: 90%;
+        }
+
+        .order-card {
+            background-color: #f5e6d3;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #6d4c41;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .order-number {
+            font-weight: 600;
+            color: #6d4c41;
+            font-size: 16px;
+        }
+
+        .order-date {
+            color: #8d6e63;
+            font-size: 14px;
+        }
+
+        .order-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .status-pending {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .status-cancelled {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .order-items {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #d7ccc8;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-total {
+            text-align: right;
+            font-weight: 600;
+            color: #6d4c41;
+            font-size: 16px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #6d4c41;
+        }
+
+        .no-orders {
+            text-align: center;
+            color: #8d6e63;
+            font-style: italic;
+            padding: 40px 20px;
+        }
+
         /* Responsive login styles */
         @media (max-width: 600px) {
             .login-btn {
@@ -862,6 +1098,15 @@
 
             .login-btn span {
                 font-size: 12px;
+            }
+
+            .dropdown-content {
+                min-width: 180px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
             }
         }
 
@@ -878,9 +1123,23 @@
                 font-size: 11px;
             }
 
-            .login-modal-content {
+            .login-modal-content, .profile-modal-content, .orders-modal-content {
                 width: 95%;
                 margin: 10px;
+            }
+
+            .dropdown-content {
+                min-width: 160px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
         }
     </style>
@@ -1066,6 +1325,91 @@
         </div>
     </div>
 
+    <!-- User Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content profile-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Editar Perfil</h2>
+                <button class="close" onclick="closeProfileModal()">&times;</button>
+            </div>
+            <form id="profileForm" class="profile-form">
+                <div class="profile-section">
+                    <h3>Información Personal</h3>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="profileName">Nombre</label>
+                            <input type="text" id="profileName" name="name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="profileLastName">Apellido</label>
+                            <input type="text" id="profileLastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="profileEmail">Correo electrónico</label>
+                        <input type="email" id="profileEmail" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="profilePhone">Teléfono</label>
+                        <input type="tel" id="profilePhone" name="phone">
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <h3>Dirección de Entrega</h3>
+                    <div class="input-group">
+                        <label for="profileAddress">Dirección</label>
+                        <input type="text" id="profileAddress" name="address">
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="profileCity">Ciudad</label>
+                            <input type="text" id="profileCity" name="city">
+                        </div>
+                        <div class="input-group">
+                            <label for="profileZip">Código Postal</label>
+                            <input type="text" id="profileZip" name="zip">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <h3>Cambiar Contraseña</h3>
+                    <div class="input-group">
+                        <label for="currentPassword">Contraseña Actual</label>
+                        <input type="password" id="currentPassword" name="currentPassword">
+                    </div>
+                    <div class="input-group">
+                        <label for="newPassword">Nueva Contraseña</label>
+                        <input type="password" id="newPassword" name="newPassword">
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmPassword">Confirmar Nueva Contraseña</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword">
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeProfileModal()">Cancelar</button>
+                    <button type="submit" class="save-btn">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Orders Modal -->
+    <div id="ordersModal" class="modal">
+        <div class="modal-content orders-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Mis Pedidos</h2>
+                <button class="close" onclick="closeOrdersModal()">&times;</button>
+            </div>
+            <div id="ordersContent">
+                <!-- Orders will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
     <!-- Info Menu Overlay -->
     <div id="infoMenuOverlay" class="menu-overlay">
         <div class="menu-content">
@@ -1214,6 +1558,9 @@
                 closeModal();
                 closeInfoMenu();
                 closeLoginModal();
+                closeProfileModal();
+                closeOrdersModal();
+                closeUserDropdown();
             }
         });
 
@@ -1253,6 +1600,9 @@
             }
         });
 
+        // Variable global para manejar el estado del usuario
+        let currentUser = null;
+
         // Manejar envío del formulario de login
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1263,15 +1613,73 @@
             
             // Simulación de login (aquí iría la lógica real de autenticación)
             if (email && password) {
-                alert(`¡Bienvenido de nuevo!\n\nEmail: ${email}\nRecordar sesión: ${remember ? 'Sí' : 'No'}\n\n(Esta es una demostración - en una aplicación real aquí se validarían las credenciales con un servidor)`);
-                closeLoginModal();
-                
-                // Cambiar el botón de login por uno de usuario logueado
-                const loginBtn = document.querySelector('.login-btn span');
-                loginBtn.textContent = '👤 Mi Cuenta';
-                loginBtn.parentElement.onclick = function() {
-                    alert('Funciones de cuenta:\n- Ver pedidos\n- Editar perfil\n- Cerrar sesión\n\n(Funcionalidad pendiente de implementar)');
+                // Simular datos de usuario
+                currentUser = {
+                    email: email,
+                    name: 'Usuario',
+                    lastName: 'Demo',
+                    phone: '+52 55 1234 5678',
+                    address: 'Calle Principal #123',
+                    city: 'Ciudad de México',
+                    zip: '01000'
                 };
+                
+                alert(`¡Bienvenido de nuevo!\n\nEmail: ${email}\nRecordar sesión: ${remember ? 'Sí' : 'No'}`);
+                closeLoginModal();
+                updateLoginButton();
+            }
+        });
+
+        // Función para actualizar el botón de login después del login exitoso
+        function updateLoginButton() {
+            const loginBtn = document.querySelector('.login-btn');
+            loginBtn.innerHTML = `
+                <div class="user-dropdown">
+                    <span>👤 Mi Cuenta</span>
+                    <div id="userDropdown" class="dropdown-content">
+                        <div class="user-info">
+                            <div class="user-email">${currentUser.email}</div>
+                            <div>Cafetería González</div>
+                        </div>
+                        <div class="dropdown-item" onclick="openOrdersModal()">
+                            <span>📋</span> Ver Pedidos
+                        </div>
+                        <div class="dropdown-item" onclick="openProfileModal()">
+                            <span>⚙️</span> Editar Perfil
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" onclick="logout()">
+                            <span>🚪</span> Cerrar Sesión
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Cambiar el evento onclick para mostrar el dropdown
+            loginBtn.onclick = function(e) {
+                e.stopPropagation();
+                toggleUserDropdown();
+            };
+        }
+
+        // Función para mostrar/ocultar el dropdown del usuario
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Función para cerrar el dropdown del usuario
+        function closeUserDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            if (dropdown) {
+                dropdown.classList.remove('show');
+            }
+        }
+
+        // Cerrar dropdown al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.user-dropdown')) {
+                closeUserDropdown();
             }
         });
 
@@ -1287,6 +1695,190 @@
                 alert(`Se ha enviado un enlace de recuperación a: ${email}\n\n(Esta es una demostración - en una aplicación real se enviaría un email real)`);
             }
         }
+
+        // Funciones para el modal de perfil
+        function openProfileModal() {
+            closeUserDropdown();
+            if (currentUser) {
+                // Llenar el formulario con los datos del usuario actual
+                document.getElementById('profileName').value = currentUser.name || '';
+                document.getElementById('profileLastName').value = currentUser.lastName || '';
+                document.getElementById('profileEmail').value = currentUser.email || '';
+                document.getElementById('profilePhone').value = currentUser.phone || '';
+                document.getElementById('profileAddress').value = currentUser.address || '';
+                document.getElementById('profileCity').value = currentUser.city || '';
+                document.getElementById('profileZip').value = currentUser.zip || '';
+            }
+            document.getElementById('profileModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            // Limpiar campos de contraseña
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        // Manejar envío del formulario de perfil
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validar contraseñas si se están cambiando
+            if (newPassword && newPassword !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            // Actualizar datos del usuario
+            currentUser.name = document.getElementById('profileName').value;
+            currentUser.lastName = document.getElementById('profileLastName').value;
+            currentUser.email = document.getElementById('profileEmail').value;
+            currentUser.phone = document.getElementById('profilePhone').value;
+            currentUser.address = document.getElementById('profileAddress').value;
+            currentUser.city = document.getElementById('profileCity').value;
+            currentUser.zip = document.getElementById('profileZip').value;
+            
+            alert('Perfil actualizado correctamente');
+            closeProfileModal();
+            updateLoginButton(); // Actualizar el email mostrado en el dropdown
+        });
+
+        // Funciones para el modal de pedidos
+        function openOrdersModal() {
+            closeUserDropdown();
+            loadOrders();
+            document.getElementById('ordersModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOrdersModal() {
+            document.getElementById('ordersModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Función para cargar pedidos simulados
+        function loadOrders() {
+            const ordersContent = document.getElementById('ordersContent');
+            
+            // Datos de pedidos simulados
+            const sampleOrders = [
+                {
+                    id: '001',
+                    date: '2024-10-25',
+                    status: 'completed',
+                    items: [
+                        { name: 'Espresso', quantity: 2, price: 45 },
+                        { name: 'Capuchino', quantity: 1, price: 55 }
+                    ],
+                    total: 145
+                },
+                {
+                    id: '002',
+                    date: '2024-10-28',
+                    status: 'pending',
+                    items: [
+                        { name: 'Latte Macchiato', quantity: 1, price: 65 },
+                        { name: 'Mocha', quantity: 1, price: 70 }
+                    ],
+                    total: 135
+                },
+                {
+                    id: '003',
+                    date: '2024-10-29',
+                    status: 'cancelled',
+                    items: [
+                        { name: 'Flat White', quantity: 1, price: 60 }
+                    ],
+                    total: 60
+                }
+            ];
+            
+            if (sampleOrders.length === 0) {
+                ordersContent.innerHTML = '<div class="no-orders">No tienes pedidos registrados</div>';
+                return;
+            }
+            
+            let ordersHTML = '';
+            sampleOrders.forEach(order => {
+                const statusClass = `status-${order.status}`;
+                const statusText = order.status === 'completed' ? 'Completado' : 
+                                 order.status === 'pending' ? 'Pendiente' : 'Cancelado';
+                
+                ordersHTML += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div>
+                                <div class="order-number">Pedido #${order.id}</div>
+                                <div class="order-date">${formatDate(order.date)}</div>
+                            </div>
+                            <div class="order-status ${statusClass}">${statusText}</div>
+                        </div>
+                        <ul class="order-items">
+                `;
+                
+                order.items.forEach(item => {
+                    ordersHTML += `
+                        <li class="order-item">
+                            <span>${item.quantity}x ${item.name}</span>
+                            <span>$${item.price}</span>
+                        </li>
+                    `;
+                });
+                
+                ordersHTML += `
+                        </ul>
+                        <div class="order-total">Total: $${order.total}</div>
+                    </div>
+                `;
+            });
+            
+            ordersContent.innerHTML = ordersHTML;
+        }
+
+        // Función para formatear fecha
+        function formatDate(dateString) {
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            return new Date(dateString).toLocaleDateString('es-ES', options);
+        }
+
+        // Función para cerrar sesión
+        function logout() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                currentUser = null;
+                
+                // Restaurar el botón de login original
+                const loginBtn = document.querySelector('.login-btn');
+                loginBtn.innerHTML = '<span>👤 Iniciar Sesión</span>';
+                loginBtn.onclick = function() {
+                    openLoginModal();
+                };
+                
+                alert('Sesión cerrada correctamente');
+            }
+        }
+
+        // Cerrar modales al hacer clic fuera del contenido
+        document.getElementById('profileModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProfileModal();
+            }
+        });
+
+        document.getElementById('ordersModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeOrdersModal();
+            }
+        });
     </script>
 </body>
 </html>
