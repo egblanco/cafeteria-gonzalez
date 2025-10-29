@@ -1087,6 +1087,150 @@
             padding: 40px 20px;
         }
 
+        /* Like Button and Badge Styles */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            flex: 1;
+        }
+
+        .like-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .like-btn:hover {
+            background-color: rgba(109, 76, 65, 0.1);
+            transform: scale(1.1);
+        }
+
+        .like-btn.liked .heart {
+            animation: heartBeat 0.6s ease-in-out;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        /* Badge System Styles */
+        .badge-notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #6d4c41;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 2000;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 3px solid #6d4c41;
+        }
+
+        .badge-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: badgePop 0.6s ease-in-out;
+        }
+
+        .badge-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #6d4c41;
+        }
+
+        .badge-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #5d4037;
+        }
+
+        .badge-close-btn {
+            background-color: #6d4c41;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .badge-close-btn:hover {
+            background-color: #5d4037;
+            transform: translateY(-2px);
+        }
+
+        @keyframes badgePop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* User Badges Display */
+        .user-badges {
+            margin-top: 20px;
+        }
+
+        .user-badges h4 {
+            color: #6d4c41;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge-item {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #6d4c41;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #6d4c41;
+        }
+
+        .badge-emoji {
+            font-size: 16px;
+        }
+
+        .no-badges {
+            color: #8d6e63;
+            font-style: italic;
+            font-size: 14px;
+        }
+
         /* Responsive login styles */
         @media (max-width: 600px) {
             .login-btn {
@@ -1169,97 +1313,192 @@
 
     <div class="menu">
         <div id="card-Espresso" class="card" onclick="openModal('Espresso', 'Café corto e intenso, pura esencia del grano.', 'Café molido: 7-9 gramos|Agua: 25-30 ml|Azúcar: al gusto (0-5 gramos)', 'Calienta la máquina de espresso|Muele el café fino y colócalo en el portafiltro|Presiona firmemente el café|Extrae durante 25-30 segundos|Sirve inmediatamente')">
-            <h2>Espresso</h2>
+            <div class="card-header">
+                <h2>Espresso</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Espresso')" data-coffee="Espresso">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Café corto e intenso, pura esencia del grano.</p>
         </div>
 
         <div id="card-Café con leche" class="card" onclick="openModal('Café con leche', 'Clásico balance entre espresso y leche caliente.', 'Café molido: 7-9 gramos|Leche: 150 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Prepara un espresso|Calienta la leche sin que hierva (60-65°C)|Vierte el espresso en una taza grande|Añade la leche caliente|Agrega azúcar al gusto y revuelve')">
-            <h2>Café con leche</h2>
+            <div class="card-header">
+                <h2>Café con leche</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Café con leche')" data-coffee="Café con leche">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Clásico balance entre espresso y leche caliente.</p>
         </div>
 
         <div id="card-Capuchino" class="card" onclick="openModal('Capuchino', 'Espresso con leche espumada, textura suave y cremosa.', 'Café molido: 7-9 gramos|Leche: 120 ml|Agua: 30 ml|Azúcar: al gusto (0-8 gramos)|Canela en polvo: opcional', 'Prepara un espresso|Vaporiza la leche hasta crear espuma cremosa|Vierte el espresso en una taza|Añade la leche con movimiento circular|Completa con espuma|Espolvorea canela si deseas')">
-            <h2>Capuchino</h2>
+            <div class="card-header">
+                <h2>Capuchino</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Capuchino')" data-coffee="Capuchino">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Espresso con leche espumada, textura suave y cremosa.</p>
         </div>
 
         <div id="card-Latte Macchiato" class="card" onclick="openModal('Latte Macchiato', 'Leche caliente con un toque delicado de espresso.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Azúcar: al gusto (0-10 gramos)', 'Vaporiza la leche creando buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Vierte lentamente el espresso sobre la leche|Se formarán 3 capas: leche, café, espuma')">
-            <h2>Latte Macchiato</h2>
+            <div class="card-header">
+                <h2>Latte Macchiato</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Latte Macchiato')" data-coffee="Latte Macchiato">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Leche caliente con un toque delicado de espresso.</p>
         </div>
 
         <div id="card-Bombón" class="card" onclick="openModal('Bombón', 'Espresso con leche condensada, dulce y reconfortante.', 'Café molido: 7-9 gramos|Leche condensada: 30-40 ml|Agua: 30 ml|Espuma de leche: opcional (para decorar)|Azúcar: no necesita (la leche condensada es dulce)', 'Vierte la leche condensada en un vaso de vidrio|Prepara un espresso|Vierte el espresso cuidadosamente sobre la leche condensada|Se formará una bonita capa doble|Opcionalmente, corona con espuma de leche|Revuelve antes de beber')">
-            <h2>Bombón</h2>
+            <div class="card-header">
+                <h2>Bombón</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Bombón')" data-coffee="Bombón">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Espresso con leche condensada, dulce y reconfortante.</p>
         </div>
 
         <div id="card-Mocha" class="card" onclick="openModal('Mocha', 'Combinación deliciosa de café, leche y chocolate.', 'Café molido: 7-9 gramos|Leche: 150 ml|Chocolate o cacao: 15-20 gramos|Agua: 30 ml|Azúcar: 5-10 gramos|Crema batida: opcional', 'Derrite el chocolate con un poco de leche caliente|Prepara un espresso|Mezcla el chocolate derretido con el espresso|Vaporiza el resto de la leche|Vierte la leche en la mezcla|Decora con crema batida y cacao en polvo')">
-            <h2>Mocha</h2>
+            <div class="card-header">
+                <h2>Mocha</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Mocha')" data-coffee="Mocha">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Combinación deliciosa de café, leche y chocolate.</p>
         </div>
 
         <div id="card-Flat White" class="card" onclick="openModal('Flat White', 'Suave microespuma y sabor concentrado de café.', 'Café molido: 14-18 gramos (doble shot)|Leche: 120 ml|Agua: 60 ml|Azúcar: al gusto (0-8 gramos)', 'Prepara un espresso doble|Vaporiza la leche creando microespuma (burbujas muy finas)|Vierte el espresso en una taza|Añade la leche con técnica de latte art|La capa de espuma debe ser delgada (0.5 cm)')">
-            <h2>Flat White</h2>
+            <div class="card-header">
+                <h2>Flat White</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Flat White')" data-coffee="Flat White">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Suave microespuma y sabor concentrado de café.</p>
         </div>
 
         <div id="card-Cortado" class="card" onclick="openModal('Cortado', 'Espresso suavizado con un toque de leche caliente.', 'Café molido: 7-9 gramos|Leche: 30-40 ml|Agua: 30 ml|Azúcar: al gusto (0-5 gramos)', 'Prepara un espresso en una taza pequeña|Calienta una pequeña cantidad de leche|Añade la leche al espresso|Corta el sabor fuerte del café|Sirve en taza pequeña tipo cortado')">
-            <h2>Cortado</h2>
+            <div class="card-header">
+                <h2>Cortado</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Cortado')" data-coffee="Cortado">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Espresso suavizado con un toque de leche caliente.</p>
         </div>
 
         <div id="card-Miel" class="card" onclick="openModal('Miel', 'Añadido dulce y aromático que encanta el paladar.', 'Café molido: 7-9 gramos|Agua: 30 ml|Miel: 10-15 gramos|Leche: 100 ml (opcional)', 'Prepara un espresso|Añade la miel al café caliente|Revuelve bien hasta disolver completamente|Si deseas, añade leche vaporizada|Disfruta del dulzor natural de la miel')">
-            <h2>Miel</h2>
+            <div class="card-header">
+                <h2>Miel</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Miel')" data-coffee="Miel">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Añadido dulce y aromático que encanta el paladar.</p>
         </div>
 
         <div id="card-Especial 1 – Latte Macchiato Miel y Canela" class="card" onclick="openModal('Especial 1 – Latte Macchiato Miel y Canela', 'Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.', 'Café molido: 7-9 gramos|Leche: 200 ml|Agua: 30 ml|Miel: 15-20 gramos|Esencia de vainilla: 2-3 gotas|Canela en polvo: 1-2 gramos', 'Mezcla la miel con las gotas de vainilla|Vaporiza la leche hasta crear buena espuma|Vierte la leche en un vaso alto de vidrio|Prepara un espresso|Añade la mezcla de miel y vainilla al espresso|Vierte lentamente el espresso sobre la leche|Espolvorea canela en la parte superior|Sirve con una cucharita para mezclar al gusto')">
-            <h2>Especial 1 – Latte Macchiato Miel y Canela</h2>
+            <div class="card-header">
+                <h2>Especial 1 – Latte Macchiato Miel y Canela</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Especial 1 – Latte Macchiato Miel y Canela')" data-coffee="Especial 1 – Latte Macchiato Miel y Canela">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Espresso intenso con tres cuartos de leche cremosa, esencia de vainilla, miel artesanal y una pizca de canela.</p>
         </div>
 
         <div id="card-Café Moka Italiano" class="card" onclick="openModal('Café Moka Italiano', 'Café intenso preparado con cafetera italiana tradicional.', 'Café molido medio-fino|Agua|Azúcar: opcional', 'Llena la base con agua hasta la válvula|Coloca el café molido en el filtro sin presionar|Enrosca la cafetera y pon a fuego medio|Retira del fuego cuando empiece a salir café|Sirve caliente inmediatamente')">
-            <h2>Café Moka Italiano</h2>
+            <div class="card-header">
+                <h2>Café Moka Italiano</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Café Moka Italiano')" data-coffee="Café Moka Italiano">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Café intenso preparado con cafetera italiana tradicional.</p>
         </div>
 
         <div id="card-Latte Italiano" class="card" onclick="openModal('Latte Italiano', 'Cremoso latte con base de café moka italiano.', 'Café de moka italiano|Leche para vaporizar|Espuma ligera', 'Prepara café moka italiano|Vaporiza la leche creando espuma ligera|Vierte la leche vaporizada sobre el café|Corona con una ligera capa de espuma|Sirve inmediatamente')">
-            <h2>Latte Italiano</h2>
+            <div class="card-header">
+                <h2>Latte Italiano</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Latte Italiano')" data-coffee="Latte Italiano">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Cremoso latte con base de café moka italiano.</p>
         </div>
 
         <div id="card-Café Miel y Canela Moka" class="card" onclick="openModal('Café Miel y Canela Moka', 'Café moka endulzado naturalmente con miel y canela.', 'Café de moka italiano|1 cucharadita de miel|Una pizca de canela|Leche caliente: opcional', 'Prepara café moka italiano|Mezcla la miel con el café caliente hasta disolver|Espolvorea canela al gusto|Añade leche caliente si deseas|Revuelve y disfruta del aroma')">
-            <h2>Café Miel y Canela Moka</h2>
+            <div class="card-header">
+                <h2>Café Miel y Canela Moka</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Café Miel y Canela Moka')" data-coffee="Café Miel y Canela Moka">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Café moka endulzado naturalmente con miel y canela.</p>
         </div>
 
         <div id="card-Café Filtrado Clásico" class="card" onclick="openModal('Café Filtrado Clásico', 'Café tradicional de cafetera de filtro, suave y aromático.', 'Café molido medio|Agua filtrada|Azúcar o leche: opcional', 'Coloca el filtro en la cafetera|Añade café molido (1 cucharada por taza)|Vierte agua fría en el depósito|Enciende la cafetera y espera|Sirve negro o con un toque de leche')">
-            <h2>Café Filtrado Clásico</h2>
+            <div class="card-header">
+                <h2>Café Filtrado Clásico</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Café Filtrado Clásico')" data-coffee="Café Filtrado Clásico">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Café tradicional de cafetera de filtro, suave y aromático.</p>
         </div>
 
         <div id="card-Café de Vainilla" class="card" onclick="openModal('Café de Vainilla', 'Café filtrado con delicioso aroma de vainilla.', 'Café filtrado|Esencia de vainilla (2-3 gotas)|Leche: opcional|Azúcar: al gusto', 'Prepara café filtrado normal|Añade gotas de esencia de vainilla|Mezcla bien para distribuir el sabor|Agrega leche si deseas|Endulza al gusto')">
-            <h2>Café de Vainilla</h2>
+            <div class="card-header">
+                <h2>Café de Vainilla</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Café de Vainilla')" data-coffee="Café de Vainilla">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Café filtrado con delicioso aroma de vainilla.</p>
         </div>
 
         <div id="card-Café con Chocolate" class="card" onclick="openModal('Café con Chocolate', 'Café filtrado con rico sabor a chocolate.', 'Café filtrado|Cacao en polvo o sirope de chocolate|Leche caliente|Azúcar: al gusto', 'Prepara café filtrado|Mezcla cacao en polvo o sirope con el café|Añade leche caliente al gusto|Revuelve hasta integrar completamente|Endulza si es necesario')">
-            <h2>Café con Chocolate</h2>
+            <div class="card-header">
+                <h2>Café con Chocolate</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Café con Chocolate')" data-coffee="Café con Chocolate">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Café filtrado con rico sabor a chocolate.</p>
         </div>
 
         <div id="card-Capuchino Fácil" class="card" onclick="openModal('Capuchino Fácil', 'Capuchino casero con cualquier tipo de café concentrado.', 'Café concentrado (moka o filtrado fuerte)|Leche para vaporizar|Cacao o canela en polvo', 'Prepara café concentrado|Vaporiza la leche hasta crear espuma|Vierte el café en una taza|Añade la leche vaporizada|Espolvorea cacao o canela encima')">
-            <h2>Capuchino Fácil</h2>
+            <div class="card-header">
+                <h2>Capuchino Fácil</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Capuchino Fácil')" data-coffee="Capuchino Fácil">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Capuchino casero con cualquier tipo de café concentrado.</p>
         </div>
 
         <div id="card-Affogato" class="card" onclick="openModal('Affogato', 'Postre italiano de helado bañado en café caliente.', 'Café caliente concentrado (moka o filtrado fuerte)|1 bola de helado de vainilla|Opcional: galleta o bizcocho', 'Coloca una bola de helado de vainilla en una copa|Prepara café caliente y concentrado|Vierte el café caliente sobre el helado|Sirve inmediatamente con cucharita|Acompaña con galleta si deseas')">
-            <h2>Affogato</h2>
+            <div class="card-header">
+                <h2>Affogato</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Affogato')" data-coffee="Affogato">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Postre italiano de helado bañado en café caliente.</p>
         </div>
 
         <div id="card-Café Frío Casero" class="card" onclick="openModal('Café Frío Casero', 'Refrescante café frío estilo cold brew casero.', 'Café preparado (enfriado)|Hielo abundante|Leche fría o esencia de vainilla|Azúcar o edulcorante', 'Prepara café con cafetera normal|Deja enfriar completamente|Llena un vaso con hielo|Vierte el café frío sobre el hielo|Añade leche fría o vainilla al gusto')">
-            <h2>Café Frío Casero</h2>
+            <div class="card-header">
+                <h2>Café Frío Casero</h2>
+                <button class="like-btn" onclick="toggleLike(event, 'Café Frío Casero')" data-coffee="Café Frío Casero">
+                    <span class="heart">🤍</span>
+                </button>
+            </div>
             <p>Refrescante café frío estilo cold brew casero.</p>
         </div>
     </div>
@@ -1388,6 +1627,15 @@
                         <input type="password" id="confirmPassword" name="confirmPassword">
                     </div>
                 </div>
+
+                <div class="profile-section">
+                    <h3>Mis Logros</h3>
+                    <div id="userBadgesDisplay" class="user-badges">
+                        <div class="badges-container" id="badgesContainer">
+                            <div class="no-badges">Marca tus cafés favoritos para desbloquear insignias</div>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="form-actions">
                     <button type="button" class="cancel-btn" onclick="closeProfileModal()">Cancelar</button>
@@ -1407,6 +1655,86 @@
             <div id="ordersContent">
                 <!-- Orders will be loaded here dynamically -->
             </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content profile-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Crear Cuenta Nueva</h2>
+                <button class="close" onclick="closeRegisterModal()">&times;</button>
+            </div>
+            <form id="registerForm" class="profile-form">
+                <div class="profile-section">
+                    <h3>Información Personal</h3>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="registerName">Nombre *</label>
+                            <input type="text" id="registerName" name="name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="registerLastName">Apellido *</label>
+                            <input type="text" id="registerLastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="registerEmail">Correo electrónico *</label>
+                        <input type="email" id="registerEmail" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="registerPhone">Teléfono</label>
+                        <input type="tel" id="registerPhone" name="phone" placeholder="+52 55 1234 5678">
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <h3>Dirección de Entrega</h3>
+                    <div class="input-group">
+                        <label for="registerAddress">Dirección</label>
+                        <input type="text" id="registerAddress" name="address" placeholder="Calle, número, colonia">
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="registerCity">Ciudad</label>
+                            <input type="text" id="registerCity" name="city" placeholder="Ciudad de México">
+                        </div>
+                        <div class="input-group">
+                            <label for="registerZip">Código Postal</label>
+                            <input type="text" id="registerZip" name="zip" placeholder="01000">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <h3>Contraseña</h3>
+                    <div class="input-group">
+                        <label for="registerPassword">Contraseña *</label>
+                        <input type="password" id="registerPassword" name="password" required>
+                        <small>Mínimo 8 caracteres</small>
+                    </div>
+                    <div class="input-group">
+                        <label for="registerConfirmPassword">Confirmar Contraseña *</label>
+                        <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="registerTerms" name="terms" required>
+                        <span>Acepto los <a href="#" style="color: #6d4c41;">términos y condiciones</a></span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="registerNewsletter" name="newsletter">
+                        <span>Quiero recibir ofertas y noticias por email</span>
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeRegisterModal()">Cancelar</button>
+                    <button type="submit" class="save-btn">Crear Cuenta</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -1560,7 +1888,14 @@
                 closeLoginModal();
                 closeProfileModal();
                 closeOrdersModal();
+                closeRegisterModal();
                 closeUserDropdown();
+                
+                // Cerrar notificaciones de badge
+                const badgeNotifications = document.querySelectorAll('.badge-notification');
+                badgeNotifications.forEach(notification => {
+                    notification.remove();
+                });
             }
         });
 
@@ -1600,8 +1935,54 @@
             }
         });
 
-        // Variable global para manejar el estado del usuario
+        // Variables globales para manejar el estado del usuario
         let currentUser = null;
+        let userLikedCoffees = [];
+        let userBadges = [];
+
+        // Sistema de badges/insignias
+        const availableBadges = {
+            'first_like': {
+                emoji: '💝',
+                title: 'Primer Amor',
+                description: '¡Tu primer café favorito!'
+            },
+            'espresso_lover': {
+                emoji: '☕',
+                title: 'Amante del Espresso',
+                description: 'Te encanta el café puro y fuerte'
+            },
+            'milk_coffee_fan': {
+                emoji: '🥛',
+                title: 'Fan de los Cafés con Leche',
+                description: 'Prefieres la suavidad de la leche'
+            },
+            'sweet_tooth': {
+                emoji: '🍯',
+                title: 'Goloso del Café',
+                description: 'Te gustan los cafés dulces'
+            },
+            'explorer': {
+                emoji: '🗺️',
+                title: 'Explorador Cafetero',
+                description: 'Has probado 5 tipos diferentes'
+            },
+            'connoisseur': {
+                emoji: '👑',
+                title: 'Conocedor Experto',
+                description: 'Has marcado 10 cafés como favoritos'
+            },
+            'specialty_lover': {
+                emoji: '⭐',
+                title: 'Amante de Especialidades',
+                description: 'Te gustan los cafés únicos'
+            },
+            'cold_brew_fan': {
+                emoji: '🧊',
+                title: 'Fan del Café Frío',
+                description: 'Disfrutas los cafés refrescantes'
+            }
+        };
 
         // Manejar envío del formulario de login
         document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -1623,6 +2004,11 @@
                     city: 'Ciudad de México',
                     zip: '01000'
                 };
+                
+                // Resetear likes y badges para nueva sesión
+                userLikedCoffees = [];
+                userBadges = [];
+                resetAllLikeButtons();
                 
                 alert(`¡Bienvenido de nuevo!\n\nEmail: ${email}\nRecordar sesión: ${remember ? 'Sí' : 'No'}`);
                 closeLoginModal();
@@ -1685,7 +2071,248 @@
 
         // Función para mostrar formulario de registro
         function showRegisterForm() {
-            alert('Formulario de registro\n\n(Funcionalidad pendiente de implementar)\n\nPor ahora puedes usar cualquier email y contraseña para probar el login.');
+            closeLoginModal();
+            document.getElementById('registerModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Funciones para el modal de registro
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Manejar envío del formulario de registro
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const terms = document.getElementById('registerTerms').checked;
+            
+            // Validaciones
+            if (password.length < 8) {
+                alert('La contraseña debe tener al menos 8 caracteres');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            if (!terms) {
+                alert('Debes aceptar los términos y condiciones');
+                return;
+            }
+            
+            // Crear usuario
+            currentUser = {
+                email: document.getElementById('registerEmail').value,
+                name: document.getElementById('registerName').value,
+                lastName: document.getElementById('registerLastName').value,
+                phone: document.getElementById('registerPhone').value,
+                address: document.getElementById('registerAddress').value,
+                city: document.getElementById('registerCity').value,
+                zip: document.getElementById('registerZip').value
+            };
+            
+            // Resetear likes y badges para nueva cuenta
+            userLikedCoffees = [];
+            userBadges = [];
+            resetAllLikeButtons();
+            
+            alert(`¡Bienvenido a Cafetería González!\n\nCuenta creada exitosamente para ${currentUser.name} ${currentUser.lastName}`);
+            closeRegisterModal();
+            updateLoginButton();
+        });
+
+        // Sistema de likes para cafés
+        function toggleLike(event, coffeeName) {
+            event.stopPropagation(); // Prevenir que se abra el modal
+            
+            if (!currentUser) {
+                alert('Debes iniciar sesión para marcar cafés como favoritos');
+                return;
+            }
+            
+            const likeBtn = event.target.closest('.like-btn');
+            const heart = likeBtn.querySelector('.heart');
+            const isLiked = userLikedCoffees.includes(coffeeName);
+            
+            if (isLiked) {
+                // Unlike
+                userLikedCoffees = userLikedCoffees.filter(coffee => coffee !== coffeeName);
+                heart.textContent = '🤍';
+                likeBtn.classList.remove('liked');
+                showLikeMessage(`Ya no te gusta ${coffeeName}`, false);
+            } else {
+                // Like
+                userLikedCoffees.push(coffeeName);
+                heart.textContent = '❤️';
+                likeBtn.classList.add('liked');
+                showLikeMessage(`¡Te gusta ${coffeeName}!`, true);
+                
+                // Verificar si se debe otorgar una insignia
+                checkForNewBadges(coffeeName);
+            }
+        }
+
+        // Función para mostrar mensaje de like
+        function showLikeMessage(message, isLike) {
+            const existingMessage = document.querySelector('.like-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'like-message';
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${isLike ? '#4caf50' : '#ff9800'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 25px;
+                z-index: 1500;
+                font-weight: 600;
+                animation: slideInRight 0.3s ease-out;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOutRight 0.3s ease-in';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.remove();
+                    }
+                }, 300);
+            }, 2000);
+        }
+
+        // Función para verificar y otorgar nuevas insignias
+        function checkForNewBadges(coffeeName) {
+            const newBadges = [];
+            
+            // Primera vez que marca algo como favorito
+            if (userLikedCoffees.length === 1 && !userBadges.includes('first_like')) {
+                newBadges.push('first_like');
+            }
+            
+            // Insignia de amante del espresso
+            if (coffeeName.toLowerCase().includes('espresso') && !userBadges.includes('espresso_lover')) {
+                newBadges.push('espresso_lover');
+            }
+            
+            // Insignia de fan de cafés con leche
+            const milkCoffees = ['Café con leche', 'Capuchino', 'Latte Macchiato', 'Latte Italiano', 'Flat White'];
+            if (milkCoffees.some(milk => userLikedCoffees.includes(milk)) && !userBadges.includes('milk_coffee_fan')) {
+                newBadges.push('milk_coffee_fan');
+            }
+            
+            // Insignia de goloso
+            const sweetCoffees = ['Bombón', 'Mocha', 'Miel', 'Especial 1 – Latte Macchiato Miel y Canela', 'Café Miel y Canela Moka', 'Café de Vainilla', 'Café con Chocolate'];
+            if (sweetCoffees.some(sweet => userLikedCoffees.includes(sweet)) && !userBadges.includes('sweet_tooth')) {
+                newBadges.push('sweet_tooth');
+            }
+            
+            // Insignia de explorador (5 diferentes)
+            if (userLikedCoffees.length >= 5 && !userBadges.includes('explorer')) {
+                newBadges.push('explorer');
+            }
+            
+            // Insignia de conocedor (10 diferentes)
+            if (userLikedCoffees.length >= 10 && !userBadges.includes('connoisseur')) {
+                newBadges.push('connoisseur');
+            }
+            
+            // Insignia de amante de especialidades
+            const specialtyCoffees = ['Especial 1 – Latte Macchiato Miel y Canela', 'Affogato', 'Café Moka Italiano'];
+            if (specialtyCoffees.some(special => userLikedCoffees.includes(special)) && !userBadges.includes('specialty_lover')) {
+                newBadges.push('specialty_lover');
+            }
+            
+            // Insignia de fan del café frío
+            if (coffeeName === 'Café Frío Casero' && !userBadges.includes('cold_brew_fan')) {
+                newBadges.push('cold_brew_fan');
+            }
+            
+            // Mostrar insignias nuevas
+            newBadges.forEach(badgeId => {
+                if (!userBadges.includes(badgeId)) {
+                    userBadges.push(badgeId);
+                    showBadgeNotification(badgeId);
+                }
+            });
+            
+            // Actualizar display de badges
+            updateBadgesDisplay();
+        }
+
+        // Función para mostrar notificación de nueva insignia
+        function showBadgeNotification(badgeId) {
+            const badge = availableBadges[badgeId];
+            
+            const notification = document.createElement('div');
+            notification.className = 'badge-notification';
+            notification.innerHTML = `
+                <div class="badge-icon">${badge.emoji}</div>
+                <div class="badge-title">¡Nueva Insignia!</div>
+                <div class="badge-title">${badge.title}</div>
+                <div class="badge-description">${badge.description}</div>
+                <button class="badge-close-btn" onclick="closeBadgeNotification(this)">¡Genial!</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto-cerrar después de 5 segundos
+            setTimeout(() => {
+                closeBadgeNotification(notification.querySelector('.badge-close-btn'));
+            }, 5000);
+        }
+
+        // Función para cerrar notificación de badge
+        function closeBadgeNotification(button) {
+            const notification = button.closest('.badge-notification');
+            if (notification && notification.parentNode) {
+                notification.remove();
+            }
+        }
+
+        // Función para actualizar display de badges en el perfil
+        function updateBadgesDisplay() {
+            const badgesContainer = document.getElementById('badgesContainer');
+            
+            if (userBadges.length === 0) {
+                badgesContainer.innerHTML = '<div class="no-badges">Marca tus cafés favoritos para desbloquear insignias</div>';
+                return;
+            }
+            
+            let badgesHTML = '';
+            userBadges.forEach(badgeId => {
+                const badge = availableBadges[badgeId];
+                badgesHTML += `
+                    <div class="badge-item">
+                        <span class="badge-emoji">${badge.emoji}</span>
+                        <span>${badge.title}</span>
+                    </div>
+                `;
+            });
+            
+            badgesContainer.innerHTML = badgesHTML;
+        }
+
+        // Función para resetear todos los botones de like
+        function resetAllLikeButtons() {
+            const allLikeBtns = document.querySelectorAll('.like-btn');
+            allLikeBtns.forEach(btn => {
+                btn.classList.remove('liked');
+                btn.querySelector('.heart').textContent = '🤍';
+            });
         }
 
         // Función para recuperar contraseña
@@ -1708,6 +2335,9 @@
                 document.getElementById('profileAddress').value = currentUser.address || '';
                 document.getElementById('profileCity').value = currentUser.city || '';
                 document.getElementById('profileZip').value = currentUser.zip || '';
+                
+                // Actualizar display de badges
+                updateBadgesDisplay();
             }
             document.getElementById('profileModal').classList.add('show');
             document.body.style.overflow = 'hidden';
@@ -1855,6 +2485,9 @@
         function logout() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
                 currentUser = null;
+                userLikedCoffees = [];
+                userBadges = [];
+                resetAllLikeButtons();
                 
                 // Restaurar el botón de login original
                 const loginBtn = document.querySelector('.login-btn');
@@ -1865,6 +2498,84 @@
                 
                 alert('Sesión cerrada correctamente');
             }
+        }
+
+        // Función para manejar likes en los cafés
+        function toggleLike(event, coffeeName) {
+            // Evitar que se abra el modal cuando se hace clic en el botón de like
+            event.stopPropagation();
+            
+            const button = event.currentTarget;
+            const heart = button.querySelector('.heart');
+            
+            // Alternar entre corazón vacío y lleno
+            if (heart.textContent === '🤍') {
+                heart.textContent = '❤️';
+                button.classList.add('liked');
+                
+                // Simulación de guardado (aquí se haría una llamada a la API)
+                console.log(`Like agregado a: ${coffeeName}`);
+                
+                // Mostrar mensaje temporal (opcional)
+                showLikeMessage(coffeeName, true);
+            } else {
+                heart.textContent = '🤍';
+                button.classList.remove('liked');
+                
+                // Simulación de eliminación (aquí se haría una llamada a la API)
+                console.log(`Like removido de: ${coffeeName}`);
+                
+                // Mostrar mensaje temporal (opcional)
+                showLikeMessage(coffeeName, false);
+            }
+        }
+        
+        // Función para mostrar mensaje temporal de like
+        function showLikeMessage(coffeeName, isLiked) {
+            // Crear elemento de mensaje temporal
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${isLiked ? '#4caf50' : '#ff9800'};
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 9999;
+                font-size: 14px;
+                font-family: 'Georgia', serif;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                animation: slideInRight 0.3s ease-out;
+            `;
+            
+            message.textContent = isLiked 
+                ? `❤️ ${coffeeName} agregado a favoritos`
+                : `🤍 ${coffeeName} removido de favoritos`;
+            
+            // Agregar estilos de animación
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(message);
+            
+            // Remover el mensaje después de 3 segundos
+            setTimeout(() => {
+                message.remove();
+                style.remove();
+            }, 3000);
         }
 
         // Cerrar modales al hacer clic fuera del contenido
@@ -1879,6 +2590,45 @@
                 closeOrdersModal();
             }
         });
+
+        document.getElementById('registerModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRegisterModal();
+            }
+        });
+
+        // Agregar animaciones CSS para mensajes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            .profile-form small {
+                color: #8d6e63;
+                font-size: 12px;
+                margin-top: 5px;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
