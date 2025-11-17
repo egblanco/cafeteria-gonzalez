@@ -1,7 +1,7 @@
 {
   "name": "cafeteria-gonzalez-chatbot",
-  "version": "2.0.0",
-  "description": "Chatbot IA para Cafetería González usando Hugging Face",
+  "version": "3.0.0",
+  "description": "Chatbot IA para Cafetería González usando Groq (ultra-rápido y gratuito)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,17 +10,18 @@
   "keywords": [
     "chatbot",
     "ai",
-    "huggingface",
-    "mistral",
+    "groq",
+    "llama",
     "cafe"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@huggingface/inference": "^2.8.1",
+    "@huggingface/inference": "^4.13.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.18.3"
+    "express": "^4.18.3",
+    "groq-sdk": "^0.35.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { HfInference } = require('@huggingface/inference');
+const Groq = require('groq-sdk');
 require('dotenv').config();
 
 const app = express();
@@ -11,10 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 // IMPORTANTE: La API key debe estar en el archivo .env, NO aquí
-const hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
+const groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY
+});
 
-// Modelo a usar (puedes cambiarlo por cualquier modelo de Hugging Face)
-const MODEL = 'mistralai/Mistral-7B-Instruct-v0.2';
+// Modelo a usar - Groq ofrece modelos muy rápidos y gratuitos
+const MODEL = 'llama-3.1-8b-instant';
 
 // Endpoint para el chat
 app.post('/api/chat', async (req, res) => {
@@ -26,52 +28,52 @@ app.post('/api/chat', async (req, res) => {
         }
 
         // Verificar que la API key esté configurada
-        if (!process.env.HUGGINGFACE_API_KEY) {
+        if (!process.env.GROQ_API_KEY) {
             return res.status(500).json({
-                error: 'API key no configurada. Por favor configura HUGGINGFACE_API_KEY en el archivo .env'
+                error: 'API key no configurada. Por favor configura GROQ_API_KEY en el archivo .env'
             });
         }
 
-        // Construir el prompt con historial y contexto
-        let conversationContext = `Eres un asistente experto en café de la Cafetería González.
-Tienes conocimiento profundo sobre:
+        // Construir mensajes para la API de Groq
+        const messages = [
+            {
+                role: 'system',
+                content: `Eres un asistente experto en café de la Cafetería González. Tienes conocimiento profundo sobre:
 - Tipos de café y sus preparaciones
 - Recetas de bebidas de café
 - Historia y cultura del café
 - Técnicas de barista
 - Maridajes y recomendaciones
 
-Responde de manera amigable, informativa y profesional en español.
-Si no sabes algo, sé honesto al respecto.
-
-`;
+Responde de manera amigable, informativa y profesional en español. Sé conciso pero completo.`
+            }
+        ];
 
         // Agregar historial de conversación
         history.forEach(msg => {
-            if (msg.role === 'user') {
-                conversationContext += `Usuario: ${msg.content}\n`;
-            } else if (msg.role === 'assistant') {
-                conversationContext += `Asistente: ${msg.content}\n`;
-            }
+            messages.push({
+                role: msg.role,
+                content: msg.content
+            });
         });
 
         // Agregar mensaje actual
-        conversationContext += `Usuario: ${message}\nAsistente:`;
+        messages.push({
+            role: 'user',
+            content: message
+        });
 
-        // Llamar a la API de Hugging Face
-        const response = await hf.textGeneration({
+        // Llamar a la API de Groq
+        const response = await groq.chat.completions.create({
             model: MODEL,
-            inputs: conversationContext,
-            parameters: {
-                max_new_tokens: 500,
-                temperature: 0.7,
-                top_p: 0.95,
-                return_full_text: false
-            }
+            messages: messages,
+            max_tokens: 500,
+            temperature: 0.7,
+            top_p: 0.9
         });
 
         // Extraer el texto de la respuesta
-        const assistantMessage = response.generated_text.trim();
+        const assistantMessage = response.choices[0].message.content.trim();
 
         res.json({
             response: assistantMessage,
@@ -103,20 +105,21 @@ app.get('/api/health', (req, res) => {
     res.json({
         status: 'ok',
         message: 'Servidor de chatbot funcionando correctamente',
-        hasApiKey: !!process.env.HUGGINGFACE_API_KEY,
-        model: MODEL
+        hasApiKey: !!process.env.GROQ_API_KEY,
+        model: MODEL,
+        provider: 'Groq'
     });
 });
 
 // Iniciar servidor
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-    console.log(`🤗 Usando Hugging Face con modelo: ${MODEL}`);
-    console.log(`📝 API key configurada: ${process.env.HUGGINGFACE_API_KEY ? 'SÍ ✅' : 'NO ❌'}`);
+    console.log(`⚡ Usando Groq con modelo: ${MODEL}`);
+    console.log(`📝 API key configurada: ${process.env.GROQ_API_KEY ? 'SÍ ✅' : 'NO ❌'}`);
 
-    if (!process.env.HUGGINGFACE_API_KEY) {
-        console.warn('⚠️  ADVERTENCIA: No se encontró HUGGINGFACE_API_KEY en el archivo .env');
-        console.warn('   Por favor crea un archivo .env con tu API key de Hugging Face');
-        console.warn('   Obtén una gratis en: https://huggingface.co/settings/tokens');
+    if (!process.env.GROQ_API_KEY) {
+        console.warn('⚠️  ADVERTENCIA: No se encontró GROQ_API_KEY en el archivo .env');
+        console.warn('   Por favor crea un archivo .env con tu API key de Groq');
+        console.warn('   Obtén una GRATIS en: https://console.groq.com/keys');
     }
 });

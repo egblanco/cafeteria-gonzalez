@@ -267,7 +267,20 @@
             .hamburger-line {
                 height: 2.5px;
             }
-            
+
+            /* Botones superiores responsive */
+            .top-buttons {
+                top: 15px;
+                right: 15px;
+                gap: 8px;
+            }
+
+            .top-btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+                min-width: 60px;
+            }
+
             /* Menu content responsive */
             .menu-content {
                 padding: 20px;
@@ -374,7 +387,20 @@
             .hamburger-line {
                 height: 2px;
             }
-            
+
+            /* Botones superiores para pantallas pequeñas */
+            .top-buttons {
+                top: 10px;
+                right: 10px;
+                gap: 6px;
+            }
+
+            .top-btn {
+                padding: 6px 10px;
+                font-size: 0.85em;
+                min-width: 50px;
+            }
+
             /* Menu content para pantallas pequeñas */
             .menu-content {
                 padding: 15px;
@@ -558,6 +584,35 @@
         .hamburger-menu:hover {
             background-color: rgba(62, 39, 35, 1);
             transform: scale(1.1);
+        }
+
+        /* Botones superiores Guía y Ayuda */
+        .top-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 10px;
+        }
+
+        .top-btn {
+            background-color: rgba(62, 39, 35, 0.9);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: white;
+            font-family: 'Georgia', serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            min-height: 44px;
+        }
+
+        .top-btn:hover {
+            background-color: rgba(62, 39, 35, 1);
+            transform: scale(1.05);
         }
         
         .hamburger-icon {
@@ -792,6 +847,12 @@
             <div class="hamburger-line"></div>
         </div>
     </button>
+
+    <!-- Botones superiores -->
+    <div class="top-buttons">
+        <button class="top-btn" onclick="openGuide()">Guía</button>
+        <button class="top-btn" onclick="openChatbot()">Ayuda</button>
+    </div>
 
     <header>
         <div class="logo">
@@ -1128,6 +1189,17 @@
                 closeInfoMenu();
             }
         });
+
+        // Funciones para los botones superiores
+        function openGuide() {
+            // Abrir el PDF en una nueva pestaña
+            window.open('imagen/Guia_completa_cafe_Cafeteria_Gonzalez_legible.pdf', '_blank');
+        }
+
+        function openChatbot() {
+            // Abrir el chatbot en una nueva pestaña
+            window.open('chatbot.html', '_blank');
+        }
 
     </script>
 </body>
