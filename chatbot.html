@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot IA - Cafetería González</title>
+    <title>Chatbot Simple - Cafetería González</title>
     <style>
         * {
             margin: 0;
@@ -120,6 +120,34 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
+        .quick-replies {
+            padding: 10px 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .quick-reply-btn {
+            background: #6d4c41;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+
+        .quick-reply-btn:hover {
+            background: #3e2723;
+            transform: translateY(-2px);
+        }
+
         .chat-input-container {
             padding: 20px;
             background: white;
@@ -143,11 +171,6 @@
             border-color: #667eea;
         }
 
-        .chat-input:disabled {
-            background: #f5f5f5;
-            cursor: not-allowed;
-        }
-
         .send-button {
             padding: 12px 24px;
             background: linear-gradient(135deg, #6d4c41 0%, #3e2723 100%);
@@ -160,71 +183,9 @@
             transition: all 0.3s;
         }
 
-        .send-button:hover:not(:disabled) {
+        .send-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .send-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .typing-indicator {
-            display: none;
-            align-items: center;
-            gap: 5px;
-            padding: 12px 16px;
-            background: white;
-            border-radius: 15px;
-            width: fit-content;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .typing-indicator.show {
-            display: flex;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #6d4c41;
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typing {
-            0%, 60%, 100% {
-                transform: translateY(0);
-                opacity: 0.7;
-            }
-            30% {
-                transform: translateY(-10px);
-                opacity: 1;
-            }
-        }
-
-        .error-message {
-            background: #ffebee;
-            color: #c62828;
-            padding: 12px 16px;
-            border-radius: 10px;
-            border-left: 4px solid #c62828;
-            margin: 10px;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in;
         }
 
         @media (max-width: 600px) {
@@ -243,20 +204,25 @@
 <body>
     <div class="chat-container">
         <div class="chat-header">
-            <h1>☕ Chatbot IA - Cafetería González</h1>
-            <p>Pregúntame lo que quieras sobre café</p>
-            <small style="opacity: 0.8; font-size: 0.8em;">🤗 Powered by Hugging Face AI (Llama 3)</small>
+            <h1>☕ Chatbot - Cafetería González</h1>
+            <p>Asistente virtual sobre café</p>
+            <small style="opacity: 0.8; font-size: 0.8em;">💬 100% Gratis - Sin servidor</small>
         </div>
-
-        <div class="error-message" id="errorMessage"></div>
 
         <div class="chat-messages" id="chatMessages">
             <div class="message assistant">
                 <div class="message-avatar">🤖</div>
                 <div class="message-content">
-                    ¡Hola! Soy tu asistente de IA de Cafetería González. Puedo responder preguntas sobre café, recetas, preparación y más. ¿En qué puedo ayudarte hoy?
+                    ¡Hola! Soy tu asistente virtual de Cafetería González. Te puedo ayudar con información sobre café, recetas y más. ¿En qué puedo ayudarte?
                 </div>
             </div>
+        </div>
+
+        <div class="quick-replies" id="quickReplies">
+            <button class="quick-reply-btn" onclick="sendQuickReply('¿Qué es un espresso?')">¿Qué es un espresso?</button>
+            <button class="quick-reply-btn" onclick="sendQuickReply('¿Cómo hacer capuchino?')">¿Cómo hacer capuchino?</button>
+            <button class="quick-reply-btn" onclick="sendQuickReply('Tipos de café')">Tipos de café</button>
+            <button class="quick-reply-btn" onclick="sendQuickReply('¿Qué es latte?')">¿Qué es latte?</button>
         </div>
 
         <div class="chat-input-container">
@@ -275,10 +241,62 @@
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const sendButton = document.getElementById('sendButton');
-        const errorMessage = document.getElementById('errorMessage');
 
-        // Historial de conversación
-        let conversationHistory = [];
+        // Base de conocimiento sobre café
+        const knowledge = {
+            'espresso': {
+                keywords: ['espresso', 'expreso', 'express'],
+                response: 'El **espresso** es un café corto e intenso preparado forzando agua caliente a presión a través de café molido fino. Se caracteriza por su crema dorada en la superficie y su sabor concentrado. La preparación toma entre 25-30 segundos y usa 7-9 gramos de café.'
+            },
+            'capuchino': {
+                keywords: ['capuchino', 'cappuccino', 'capucino'],
+                response: 'El **capuchino** es una bebida italiana compuesta por espresso, leche caliente y espuma de leche en partes iguales. Se prepara vaporizando la leche hasta crear una espuma cremosa, luego se vierte sobre el espresso. Opcionalmente se espolvorea con canela o cacao.'
+            },
+            'latte': {
+                keywords: ['latte', 'late', 'café con leche'],
+                response: 'El **latte** (o café con leche) es una bebida suave que combina espresso con una generosa cantidad de leche caliente (150-200ml). La proporción es aproximadamente 1/3 de espresso y 2/3 de leche. Es ideal para quienes prefieren un sabor más suave.'
+            },
+            'macchiato': {
+                keywords: ['macchiato', 'manchado', 'macciato'],
+                response: 'El **latte macchiato** se caracteriza por sus tres capas distintivas: leche caliente en el fondo, espresso en el medio y espuma de leche arriba. Se prepara virtiendo el espresso lentamente sobre la leche vaporizada en un vaso alto de vidrio.'
+            },
+            'mocha': {
+                keywords: ['mocha', 'moka', 'chocolate'],
+                response: 'El **mocha** es una deliciosa combinación de espresso, leche caliente y chocolate (15-20g). Se prepara derritiendo el chocolate con leche caliente, mezclando con espresso y completando con espuma. Opcionalmente se decora con crema batida y cacao en polvo.'
+            },
+            'bombon': {
+                keywords: ['bombón', 'bombon', 'condensada'],
+                response: 'El **café bombón** es una bebida dulce y reconfortante que combina espresso con leche condensada. Se sirve en un vaso de vidrio para apreciar las dos capas: leche condensada abajo y espresso arriba. No necesita azúcar adicional debido a la dulzura de la leche condensada.'
+            },
+            'flat white': {
+                keywords: ['flat white', 'flatwhite', 'flat'],
+                response: 'El **flat white** es una bebida australiana similar al latte pero con menos leche y una capa más fina de microespuma. Usa un espresso doble (60ml) con 120ml de leche caliente perfectamente texturizada. Tiene un sabor más fuerte a café que el latte.'
+            },
+            'cortado': {
+                keywords: ['cortado', 'cortao'],
+                response: 'El **cortado** es un espresso "cortado" con una pequeña cantidad de leche caliente (50-100ml). La leche suaviza el sabor intenso del espresso sin dominarlo. Es perfecto para quienes quieren disfrutar del café con un toque de suavidad.'
+            },
+            'tipos': {
+                keywords: ['tipos', 'cuales', 'menu', 'opciones', 'que hay'],
+                response: 'En Cafetería González ofrecemos:\n\n**Básicos:**\n• Espresso\n• Café con leche\n• Capuchino\n• Cortado\n\n**Especiales:**\n• Latte Macchiato\n• Bombón\n• Mocha\n• Flat White\n\n**Premium:**\n• Latte Miel y Canela\n• Affogato\n• Café Frío\n\n¡Todos preparados con amor y café de calidad!'
+            },
+            'preparacion': {
+                keywords: ['preparar', 'hacer', 'receta', 'como se hace'],
+                response: 'Para preparar un buen café necesitas:\n\n1. **Café de calidad**: Usa granos frescos recién molidos\n2. **Temperatura correcta**: El agua debe estar entre 90-96°C\n3. **Proporción adecuada**: 7-9g de café por 25-30ml de agua para espresso\n4. **Tiempo preciso**: 25-30 segundos de extracción\n5. **Leche fresca**: Para bebidas con leche, vaporiza entre 60-65°C\n\n¿Qué café específico quieres aprender a preparar?'
+            },
+            'precio': {
+                keywords: ['precio', 'costo', 'cuanto', 'vale'],
+                response: 'Para información sobre precios y pedidos, te recomiendo:\n\n1. Visitar nuestro local directamente\n2. Llamarnos por teléfono\n3. Escribirnos por WhatsApp\n\nLos precios varían según el tipo de café y el tamaño. ¡Estamos para servirte!'
+            },
+            'horario': {
+                keywords: ['horario', 'hora', 'abierto', 'cierra', 'abre'],
+                response: 'Nuestro horario es:\n\n📅 Lunes a Viernes: 7:00 AM - 8:00 PM\n📅 Sábados: 8:00 AM - 9:00 PM\n📅 Domingos: 9:00 AM - 6:00 PM\n\n¡Te esperamos! ☕'
+            },
+            'ubicacion': {
+                keywords: ['ubicacion', 'dirección', 'direccion', 'donde', 'como llegar'],
+                response: 'Estamos ubicados en el corazón de la ciudad. Para información exacta sobre nuestra ubicación:\n\n📍 Consulta el menú principal\n📞 Contáctanos directamente\n🗺️ Búscanos en Google Maps como "Cafetería González"\n\n¡Esperamos tu visita!'
+            }
+        };
 
         // Agregar mensaje al chat
         function addMessage(content, isUser = false) {
@@ -294,42 +312,25 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // Mostrar indicador de escritura
-        function showTypingIndicator() {
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message assistant';
-            typingDiv.id = 'typingIndicator';
-            typingDiv.innerHTML = `
-                <div class="message-avatar">🤖</div>
-                <div class="typing-indicator show">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                </div>
-            `;
-            chatMessages.appendChild(typingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
+        // Buscar respuesta en la base de conocimiento
+        function findResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
 
-        // Ocultar indicador de escritura
-        function hideTypingIndicator() {
-            const typingIndicator = document.getElementById('typingIndicator');
-            if (typingIndicator) {
-                typingIndicator.remove();
+            // Buscar coincidencias en keywords
+            for (const [key, data] of Object.entries(knowledge)) {
+                for (const keyword of data.keywords) {
+                    if (lowerMessage.includes(keyword)) {
+                        return data.response;
+                    }
+                }
             }
+
+            // Respuesta por defecto
+            return `Interesante pregunta sobre "${userMessage}". Te puedo ayudar con información sobre:\n\n• Tipos de café (espresso, capuchino, latte, etc.)\n• Cómo preparar diferentes bebidas\n• Horarios y ubicación\n\n¿Sobre qué te gustaría saber más?`;
         }
 
-        // Mostrar error
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.classList.add('show');
-            setTimeout(() => {
-                errorMessage.classList.remove('show');
-            }, 5000);
-        }
-
-        // Enviar mensaje a la API
-        async function sendMessage() {
+        // Enviar mensaje
+        function sendMessage() {
             const userMessage = chatInput.value.trim();
 
             if (!userMessage) return;
@@ -338,54 +339,17 @@
             addMessage(userMessage, true);
             chatInput.value = '';
 
-            // Deshabilitar inputs
-            chatInput.disabled = true;
-            sendButton.disabled = true;
+            // Simular "escribiendo..."
+            setTimeout(() => {
+                const response = findResponse(userMessage);
+                addMessage(response);
+            }, 500);
+        }
 
-            // Mostrar indicador de escritura
-            showTypingIndicator();
-
-            try {
-                // Enviar al servidor backend
-                const response = await fetch('http://localhost:3000/api/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: userMessage,
-                        history: conversationHistory
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Error del servidor: ${response.statusText}`);
-                }
-
-                const data = await response.json();
-
-                // Ocultar indicador de escritura
-                hideTypingIndicator();
-
-                // Agregar respuesta del asistente
-                addMessage(data.response);
-
-                // Actualizar historial
-                conversationHistory.push(
-                    { role: 'user', content: userMessage },
-                    { role: 'assistant', content: data.response }
-                );
-
-            } catch (error) {
-                hideTypingIndicator();
-                showError('Error al conectar con el servidor. Asegúrate de que el servidor backend esté corriendo en el puerto 3000.');
-                console.error('Error:', error);
-            } finally {
-                // Habilitar inputs
-                chatInput.disabled = false;
-                sendButton.disabled = false;
-                chatInput.focus();
-            }
+        // Enviar respuesta rápida
+        function sendQuickReply(message) {
+            chatInput.value = message;
+            sendMessage();
         }
 
         // Event listeners
