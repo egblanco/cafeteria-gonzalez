@@ -1023,7 +1023,490 @@
         .card {
             position: relative;
         }
+
+        /* Custom Coffee Builder Styles */
+        .custom-coffee-btn {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%) !important;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4) !important;
+        }
+
+        .custom-coffee-btn:hover {
+            background: linear-gradient(135deg, #ffa726 0%, #f57c00 100%) !important;
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.6) !important;
+        }
+        
+        /* View Created Coffees Button */
+        .view-created-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%) !important;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4) !important;
+        }
+        .view-created-btn:hover {
+            background: linear-gradient(135deg, #66BB6A 0%, #2E7D32 100%) !important;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6) !important;
+        }
+        
+        /* Admin Hidden Button */
+        .admin-hidden-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .admin-hidden-btn:hover {
+            opacity: 0.1;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+        }
+        
+        /* Hide admin button on mobile devices */
+        @media (max-width: 768px) {
+            .admin-hidden-btn {
+                display: none;
+            }
+            
+            /* Hide top buttons on mobile - they're now in hamburger menu */
+            .top-buttons {
+                display: none !important;
+            }
+        }
+        
+        /* Show mobile menu buttons only on mobile */
+        .mobile-menu-buttons {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-buttons {
+                display: block;
+            }
+        }
+
+        .custom-coffee-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .custom-coffee-modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .custom-coffee-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .custom-coffee-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d7ccc8;
+        }
+
+        .custom-coffee-title {
+            color: #6d4c41;
+            font-size: 1.8em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ingredient-selector {
+            margin-bottom: 20px;
+        }
+
+        .ingredient-category {
+            margin-bottom: 20px;
+        }
+
+        .ingredient-category h4 {
+            color: #6d4c41;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #d7ccc8;
+            padding-bottom: 5px;
+        }
+
+        .ingredient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .ingredient-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 2px solid #d7ccc8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .ingredient-item:hover {
+            border-color: #6d4c41;
+            background-color: #f5e6d3;
+        }
+
+        .ingredient-item.selected {
+            border-color: #ff9800;
+            background-color: #fff3e0;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+        }
+
+        .ingredient-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: #ff9800;
+        }
+
+        .ingredient-item label {
+            flex-grow: 1;
+            cursor: pointer;
+            font-size: 14px;
+            color: #5d4037;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .quantity-control input {
+            width: 50px;
+            padding: 2px 5px;
+            border: 1px solid #d7ccc8;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .coffee-name-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #d7ccc8;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-family: 'Georgia', serif;
+        }
+
+        .coffee-name-input:focus {
+            outline: none;
+            border-color: #ff9800;
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+        }
+
+        .coffee-description-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #d7ccc8;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .coffee-description-input:focus {
+            outline: none;
+            border-color: #ff9800;
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+        }
+
+        .coffee-preview {
+            background-color: #f5e6d3;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #d7ccc8;
+        }
+
+        .coffee-preview h4 {
+            color: #6d4c41;
+            margin-bottom: 10px;
+        }
+
+        .selected-ingredients {
+            margin-bottom: 15px;
+        }
+
+        .selected-ingredients ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .selected-ingredients li {
+            padding: 5px 0;
+            color: #5d4037;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .selected-ingredients li::before {
+            content: "• ";
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: flex-end;
+        }
+
+        .save-btn, .cancel-btn, .view-saved-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .save-btn:hover {
+            background: linear-gradient(135deg, #5cbf60 0%, #4caf50 100%);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .save-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .cancel-btn {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+        }
+
+        .cancel-btn:hover {
+            background: linear-gradient(135deg, #f66356 0%, #f44336 100%);
+            box-shadow: 0 8px 25px rgba(244, 67, 54, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .view-saved-btn {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .view-saved-btn:hover {
+            background: linear-gradient(135deg, #42a5f5 0%, #2196f3 100%);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            z-index: 2000;
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Saved Coffees Viewer */
+        .saved-coffees-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .saved-coffees-modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .saved-coffees-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .saved-coffee-item {
+            background: #f5e6d3;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #d7ccc8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .saved-coffee-item:hover {
+            background: #ede0ce;
+            box-shadow: 0 4px 12px rgba(109, 76, 65, 0.2);
+        }
+
+        .saved-coffee-item h4 {
+            color: #6d4c41;
+            margin-bottom: 8px;
+            font-size: 1.3em;
+        }
+
+        .saved-coffee-item p {
+            color: #5d4037;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .saved-coffee-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .saved-coffee-date {
+            font-size: 12px;
+            color: #8d6e63;
+        }
+
+        .delete-coffee-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .delete-coffee-btn:hover {
+            background: #d32f2f;
+        }
+
+        .export-coffee-btn, .export-all-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-right: 8px;
+        }
+
+        .export-coffee-btn:hover, .export-all-btn:hover {
+            background: #1976D2;
+        }
+
+        .export-all-btn {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .custom-coffee-content {
+                padding: 20px;
+                max-height: 90vh;
+            }
+
+            .ingredient-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .top-buttons {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .top-btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+                min-width: auto;
+            }
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <!-- Hamburger Menu Button -->
@@ -1039,6 +1522,8 @@
     <div class="top-buttons">
         <button class="top-btn" onclick="openGuide()">Guía</button>
         <button class="top-btn" onclick="openChatbot()">Ayuda</button>
+        <button class="top-btn custom-coffee-btn" onclick="openCustomCoffeeBuilder()">Crear tu Café</button>
+        <button class="top-btn view-created-btn" onclick="viewAllCreatedCoffees()">Ver Cafés Creados</button>
     </div>
 
     <header>
@@ -1171,6 +1656,11 @@
         <p>Hecho con amor ❤️ | Cafetería González 2025</p>
         <p><a href="https://github.com/egblanco/cafeteria-gonzalez" target="_blank" style="color: #6d4c41; text-decoration: none;">Ver en GitHub</a></p>
     </footer>
+    
+    <!-- Botón Admin Oculto -->
+    <button id="adminBtn" class="admin-hidden-btn" onclick="openAdminLogin()">
+        <span style="opacity: 0;">Admin</span>
+    </button>
 
     <!-- Modal -->
     <div id="recipeModal" class="modal">
@@ -1236,9 +1726,202 @@
                 <p><a href="imagen/Guia_completa_cafe_Cafeteria_Gonzalez_legible.pdf" target="_blank">📖 Ver Guía Completa de Café</a></p>
                 <p>Aprende todo sobre la preparación perfecta de café</p>
             </div>
+
+            <div class="menu-section mobile-menu-buttons">
+                <h3>🛠️ Herramientas</h3>
+                <p><a href="javascript:void(0)" onclick="closeInfoMenu(); openGuide();">📖 Guía de Café</a></p>
+                <p><a href="javascript:void(0)" onclick="closeInfoMenu(); openChatbot();">🤖 Ayuda con IA</a></p>
+                <p><a href="javascript:void(0)" onclick="closeInfoMenu(); openCustomCoffeeBuilder();">🔧 Crear tu Café</a></p>
+                <p><a href="javascript:void(0)" onclick="closeInfoMenu(); viewAllCreatedCoffees();">👀 Ver Cafés Creados</a></p>
+            </div>
         </div>
     </div>
 
+    <!-- Custom Coffee Builder Modal -->
+    <div id="customCoffeeModal" class="custom-coffee-modal">
+        <div class="custom-coffee-content">
+            <div class="custom-coffee-header">
+                <h2 class="custom-coffee-title">🔧 Crear tu Café Personalizado</h2>
+                <button class="close" onclick="closeCustomCoffeeBuilder()">&times;</button>
+            </div>
+            
+            <div class="coffee-form">
+                <input type="text" id="coffeeName" class="coffee-name-input" placeholder="Nombre de tu café (ej: Mi Latte Especial)" maxlength="50">
+                
+                <textarea id="coffeeDescription" class="coffee-description-input" placeholder="Descripción breve (opcional)" maxlength="200"></textarea>
+                
+                <div class="ingredient-selector">
+                    <div class="ingredient-category">
+                        <h4>☕ Base de Café</h4>
+                        <div class="ingredient-grid" id="coffeeBase">
+                            <div class="ingredient-item" onclick="toggleIngredient('espresso', 'Espresso (shot)', 'gramos')">
+                                <input type="checkbox" id="espresso">
+                                <label for="espresso">Espresso (shot)</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="1" max="5" value="1" id="espresso-qty"> shots
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('cafe-molido', 'Café molido', 'gramos')">
+                                <input type="checkbox" id="cafe-molido">
+                                <label for="cafe-molido">Café molido</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="5" max="20" value="7" id="cafe-molido-qty"> g
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('cafe-filtrado', 'Café filtrado', 'ml')">
+                                <input type="checkbox" id="cafe-filtrado">
+                                <label for="cafe-filtrado">Café filtrado</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="50" max="300" value="150" id="cafe-filtrado-qty"> ml
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-category">
+                        <h4>🥛 Lácteos y Base Líquida</h4>
+                        <div class="ingredient-grid" id="milkBase">
+                            <div class="ingredient-item" onclick="toggleIngredient('leche', 'Leche', 'ml')">
+                                <input type="checkbox" id="leche">
+                                <label for="leche">Leche</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="30" max="250" value="120" id="leche-qty"> ml
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('leche-condensada', 'Leche condensada', 'ml')">
+                                <input type="checkbox" id="leche-condensada">
+                                <label for="leche-condensada">Leche condensada</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="10" max="50" value="30" id="leche-condensada-qty"> ml
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('espuma-leche', 'Espuma de leche', 'ml')">
+                                <input type="checkbox" id="espuma-leche">
+                                <label for="espuma-leche">Espuma de leche</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="20" max="100" value="40" id="espuma-leche-qty"> ml
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('agua', 'Agua', 'ml')">
+                                <input type="checkbox" id="agua">
+                                <label for="agua">Agua</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="25" max="200" value="30" id="agua-qty"> ml
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-category">
+                        <h4>🍯 Endulzantes</h4>
+                        <div class="ingredient-grid" id="sweeteners">
+                            <div class="ingredient-item" onclick="toggleIngredient('azucar', 'Azúcar', 'gramos')">
+                                <input type="checkbox" id="azucar">
+                                <label for="azucar">Azúcar</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="2" max="20" value="5" id="azucar-qty"> g
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('miel', 'Miel', 'gramos')">
+                                <input type="checkbox" id="miel">
+                                <label for="miel">Miel</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="5" max="25" value="15" id="miel-qty"> g
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('sirope-vainilla', 'Sirope de vainilla', 'ml')">
+                                <input type="checkbox" id="sirope-vainilla">
+                                <label for="sirope-vainilla">Sirope de vainilla</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="5" max="20" value="10" id="sirope-vainilla-qty"> ml
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-category">
+                        <h4>🍫 Sabores y Especias</h4>
+                        <div class="ingredient-grid" id="flavors">
+                            <div class="ingredient-item" onclick="toggleIngredient('chocolate', 'Chocolate/Cacao', 'gramos')">
+                                <input type="checkbox" id="chocolate">
+                                <label for="chocolate">Chocolate/Cacao</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="5" max="30" value="15" id="chocolate-qty"> g
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('canela', 'Canela en polvo', 'gramos')">
+                                <input type="checkbox" id="canela">
+                                <label for="canela">Canela en polvo</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="1" max="5" value="2" id="canela-qty"> g
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('vainilla', 'Esencia de vainilla', 'gotas')">
+                                <input type="checkbox" id="vainilla">
+                                <label for="vainilla">Esencia de vainilla</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="2" max="8" value="3" id="vainilla-qty"> gotas
+                                </div>
+                            </div>
+                            <div class="ingredient-item" onclick="toggleIngredient('crema-batida', 'Crema batida', 'ml')">
+                                <input type="checkbox" id="crema-batida">
+                                <label for="crema-batida">Crema batida</label>
+                                <div class="quantity-control">
+                                    <input type="number" min="10" max="50" value="20" id="crema-batida-qty"> ml
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="coffee-preview" id="coffeePreview">
+                    <h4>Vista Previa de tu Café</h4>
+                    <div class="selected-ingredients" id="selectedIngredients">
+                        <strong>Ingredientes seleccionados:</strong>
+                        <ul id="ingredientsList">
+                            <li style="color: #8d6e63; font-style: italic;">Selecciona ingredientes para ver la receta...</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="view-saved-btn" onclick="viewSavedCoffees()">Ver Mis Cafés</button>
+                    <button class="cancel-btn" onclick="closeCustomCoffeeBuilder()">Cancelar</button>
+                    <button class="save-btn" onclick="saveCustomCoffee()" id="saveCoffeeBtn" disabled>Guardar Café</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saved Coffees Modal -->
+    <div id="savedCoffeesModal" class="saved-coffees-modal">
+        <div class="saved-coffees-content">
+            <div class="custom-coffee-header">
+                <h2 class="custom-coffee-title">☕ Mis Cafés Personalizados</h2>
+                <button class="close" onclick="closeSavedCoffees()">&times;</button>
+            </div>
+            <div style="text-align: right; padding: 10px;">
+                <button class="export-all-btn" onclick="exportAllCoffeesToPDF()">📄 Exportar Todos a PDF</button>
+            </div>
+            <div id="savedCoffeesList">
+                <!-- Los cafés guardados se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Ver Todos los Cafés Creados -->
+    <div id="allCreatedCoffeesModal" class="custom-coffee-modal">
+        <div class="saved-coffees-content">
+            <div class="saved-coffees-header">
+                <h2 class="custom-coffee-title">☕ Todos los Cafés Creados</h2>
+                <button class="close" onclick="closeAllCreatedCoffees()">&times;</button>
+            </div>
+            <div id="allCreatedCoffeesList" style="max-height: 60vh; overflow-y: auto; padding: 20px;">
+                <!-- Todos los cafés creados se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+    
     <script>
         // Mapeo de imágenes reales para cada tipo de café
         const coffeeImages = {
@@ -1386,6 +2069,528 @@
         function openChatbot() {
             // Abrir el chatbot con IA real en una nueva pestaña
             window.open('chatbot.html', '_blank');
+        }
+
+        // Custom Coffee Builder Functions
+        let selectedIngredients = new Set();
+        
+        function openCustomCoffeeBuilder() {
+            document.getElementById('customCoffeeModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            resetCustomCoffeeForm();
+        }
+        
+        function closeCustomCoffeeBuilder() {
+            document.getElementById('customCoffeeModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            resetCustomCoffeeForm();
+        }
+        
+        function resetCustomCoffeeForm() {
+            document.getElementById('coffeeName').value = '';
+            document.getElementById('coffeeDescription').value = '';
+            selectedIngredients.clear();
+            
+            // Reset all checkboxes and ingredient items
+            document.querySelectorAll('.ingredient-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.parentElement.classList.remove('selected');
+            });
+            
+            updateCoffeePreview();
+        }
+        
+        function toggleIngredient(ingredientId, displayName, unit) {
+            const checkbox = document.getElementById(ingredientId);
+            const item = checkbox.parentElement;
+            const qtyInput = document.getElementById(ingredientId + '-qty');
+            
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                item.classList.add('selected');
+                selectedIngredients.add({
+                    id: ingredientId,
+                    name: displayName,
+                    quantity: qtyInput.value,
+                    unit: unit
+                });
+            } else {
+                item.classList.remove('selected');
+                selectedIngredients = new Set([...selectedIngredients].filter(ing => ing.id !== ingredientId));
+            }
+            
+            updateCoffeePreview();
+            validateForm();
+        }
+        
+        function updateCoffeePreview() {
+            const ingredientsList = document.getElementById('ingredientsList');
+            
+            if (selectedIngredients.size === 0) {
+                ingredientsList.innerHTML = '<li style="color: #8d6e63; font-style: italic;">Selecciona ingredientes para ver la receta...</li>';
+                return;
+            }
+            
+            let html = '';
+            selectedIngredients.forEach(ingredient => {
+                const qtyInput = document.getElementById(ingredient.id + '-qty');
+                const currentQty = qtyInput ? qtyInput.value : ingredient.quantity;
+                html += `<li><span>${ingredient.name}</span> <strong>${currentQty} ${ingredient.unit}</strong></li>`;
+            });
+            
+            ingredientsList.innerHTML = html;
+        }
+        
+        function validateForm() {
+            const nameInput = document.getElementById('coffeeName');
+            const saveBtn = document.getElementById('saveCoffeeBtn');
+            
+            const hasName = nameInput.value.trim().length > 0;
+            const hasIngredients = selectedIngredients.size > 0;
+            
+            saveBtn.disabled = !(hasName && hasIngredients);
+        }
+        
+        // Event listeners for quantity changes
+        document.addEventListener('input', function(e) {
+            if (e.target.type === 'number' && e.target.id.includes('-qty')) {
+                updateCoffeePreview();
+            }
+            
+            if (e.target.id === 'coffeeName') {
+                validateForm();
+            }
+        });
+        
+        async function saveCustomCoffee() {
+            const name = document.getElementById('coffeeName').value.trim();
+            const description = document.getElementById('coffeeDescription').value.trim();
+            
+            if (!name || selectedIngredients.size === 0) {
+                showNotification('Por favor completa el nombre y selecciona al menos un ingrediente', 'error');
+                return;
+            }
+            
+            const ingredients = [];
+            const preparation = [];
+            
+            selectedIngredients.forEach(ingredient => {
+                const qtyInput = document.getElementById(ingredient.id + '-qty');
+                const quantity = qtyInput ? qtyInput.value : ingredient.quantity;
+                ingredients.push(`${ingredient.name}: ${quantity} ${ingredient.unit}`);
+            });
+            
+            // Generate basic preparation steps based on ingredients
+            preparation.push('Prepara todos los ingredientes');
+            
+            if ([...selectedIngredients].some(ing => ing.id === 'espresso' || ing.id === 'cafe-molido')) {
+                preparation.push('Prepara el café según el tipo seleccionado');
+            }
+            
+            if ([...selectedIngredients].some(ing => ing.id === 'leche' || ing.id === 'espuma-leche')) {
+                preparation.push('Calienta y espuma la leche si es necesario');
+            }
+            
+            if ([...selectedIngredients].some(ing => ing.id === 'chocolate' || ing.id === 'canela' || ing.id === 'vainilla')) {
+                preparation.push('Añade saborizantes y especias al gusto');
+            }
+            
+            preparation.push('Mezcla los ingredientes según tu preferencia');
+            preparation.push('Sirve y disfruta tu café personalizado');
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/custom-coffee', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name,
+                        description,
+                        ingredients,
+                        preparation
+                    })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    showNotification(`¡Café "${name}" guardado exitosamente!`);
+                    closeCustomCoffeeBuilder();
+                } else {
+                    const error = await response.json();
+                    showNotification(error.error || 'Error al guardar el café', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error de conexión. Asegúrate de que el servidor esté funcionando.', 'error');
+            }
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+        
+        async function viewSavedCoffees() {
+            try {
+                const response = await fetch('http://localhost:3000/api/custom-coffees');
+                
+                if (response.ok) {
+                    const coffees = await response.json();
+                    displaySavedCoffees(coffees);
+                    document.getElementById('savedCoffeesModal').classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    showNotification('Error al cargar los cafés guardados', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error de conexión. Asegúrate de que el servidor esté funcionando.', 'error');
+            }
+        }
+        
+        function displaySavedCoffees(coffees) {
+            const container = document.getElementById('savedCoffeesList');
+            
+            if (coffees.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #8d6e63; font-style: italic; padding: 20px;">No tienes cafés personalizados guardados aún.</p>';
+                return;
+            }
+            
+            let html = '';
+            coffees.forEach(coffee => {
+                const date = new Date(coffee.created_at).toLocaleDateString('es-ES');
+                html += `
+                    <div class="saved-coffee-item" onclick="openModal('${coffee.name}', '${coffee.description}', '${coffee.ingredients.join('|')}', '${coffee.preparation.join('|')}')">
+                        <h4>${coffee.name}</h4>
+                        <p>${coffee.description || 'Sin descripción'}</p>
+                        <div class="saved-coffee-meta">
+                            <span class="saved-coffee-date">Creado: ${date}</span>
+                            <button class="export-coffee-btn" onclick="event.stopPropagation(); exportCoffeeToPDF(${JSON.stringify(coffee).replace(/"/g, '&quot;')})">📄 PDF</button>
+                            <button class="delete-coffee-btn" onclick="event.stopPropagation(); deleteCoffee(${coffee.id})">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        async function deleteCoffee(coffeeId) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este café?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`http://localhost:3000/api/custom-coffee/${coffeeId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    showNotification('Café eliminado exitosamente');
+                    viewSavedCoffees(); // Refresh the list
+                } else {
+                    const error = await response.json();
+                    showNotification(error.error || 'Error al eliminar el café', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error de conexión. Asegúrate de que el servidor esté funcionando.', 'error');
+            }
+        }
+        
+        function closeSavedCoffees() {
+            document.getElementById('savedCoffeesModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close saved coffees modal when clicking outside
+        document.getElementById('savedCoffeesModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSavedCoffees();
+            }
+        });
+        
+        // Funciones para Ver Todos los Cafés Creados
+        async function viewAllCreatedCoffees() {
+            try {
+                const response = await fetch('http://localhost:3000/api/custom-coffees');
+                
+                if (response.ok) {
+                    const coffees = await response.json();
+                    displayAllCreatedCoffees(coffees);
+                    document.getElementById('allCreatedCoffeesModal').classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    showNotification('Error al cargar los cafés creados', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error de conexión. Asegúrate de que el servidor esté funcionando.', 'error');
+            }
+        }
+        
+        function displayAllCreatedCoffees(coffees) {
+            const container = document.getElementById('allCreatedCoffeesList');
+            
+            if (coffees.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #8d6e63; font-style: italic; padding: 20px;">No hay cafés personalizados creados todavía.</p>';
+                return;
+            }
+            
+            let html = '';
+            coffees.forEach(coffee => {
+                const date = new Date(coffee.created_at).toLocaleDateString('es-ES');
+                html += `
+                    <div class="saved-coffee-item" onclick="openModal('${coffee.name}', '${coffee.description}', '${coffee.ingredients.join('|')}', '${coffee.preparation.join('|')}')">
+                        <h4>${coffee.name}</h4>
+                        <p>${coffee.description || 'Sin descripción'}</p>
+                        <div class="saved-coffee-meta">
+                            <span class="saved-coffee-date">Creado: ${date}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function closeAllCreatedCoffees() {
+            document.getElementById('allCreatedCoffeesModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close all created coffees modal when clicking outside
+        document.getElementById('allCreatedCoffeesModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAllCreatedCoffees();
+            }
+        });
+        
+        // Admin Functions
+        function openAdminLogin() {
+            const password = prompt('Ingrese la contraseña de administrador:');
+            if (password === '1qazxsw2') {
+                viewAllCreatedCoffeesAsAdmin();
+            } else if (password) {
+                showNotification('Contraseña incorrecta', 'error');
+            }
+        }
+        
+        async function viewAllCreatedCoffeesAsAdmin() {
+            try {
+                const response = await fetch('http://localhost:3000/api/custom-coffees');
+                
+                if (response.ok) {
+                    const coffees = await response.json();
+                    displayAllCreatedCoffeesAsAdmin(coffees);
+                    document.getElementById('allCreatedCoffeesModal').classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    showNotification('Error al cargar los cafés creados', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error de conexión. Asegúrate de que el servidor esté funcionando.', 'error');
+            }
+        }
+        
+        function displayAllCreatedCoffeesAsAdmin(coffees) {
+            const container = document.getElementById('allCreatedCoffeesList');
+            
+            if (coffees.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #8d6e63; font-style: italic; padding: 20px;">No hay cafés personalizados creados todavía.</p>';
+                return;
+            }
+            
+            let html = '<h3 style="color: #d32f2f; margin-bottom: 20px;">🔐 MODO ADMINISTRADOR - Gestión de Cafés</h3>';
+            coffees.forEach(coffee => {
+                const date = new Date(coffee.created_at).toLocaleDateString('es-ES');
+                html += `
+                    <div class="saved-coffee-item">
+                        <div onclick="openModal('${coffee.name}', '${coffee.description}', '${coffee.ingredients.join('|')}', '${coffee.preparation.join('|')}')">
+                            <h4>${coffee.name}</h4>
+                            <p>${coffee.description || 'Sin descripción'}</p>
+                        </div>
+                        <div class="saved-coffee-meta">
+                            <span class="saved-coffee-date">Creado: ${date}</span>
+                            <button class="delete-coffee-btn" onclick="deleteCoffeeAsAdmin(${coffee.id})">🗑️ Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        async function deleteCoffeeAsAdmin(id) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este café?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`http://localhost:3000/api/custom-coffee/${id}`, {
+                    method: 'DELETE',
+                });
+                
+                if (response.ok) {
+                    showNotification('Café eliminado exitosamente');
+                    viewAllCreatedCoffeesAsAdmin(); // Refresh the list
+                } else {
+                    showNotification('Error al eliminar el café', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error de conexión', 'error');
+            }
+        }
+        
+        // Close custom coffee modal when clicking outside
+        document.getElementById('customCoffeeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCustomCoffeeBuilder();
+            }
+        });
+
+        // PDF Export Functions
+        function exportCoffeeToPDF(coffee) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Title
+            doc.setFontSize(24);
+            doc.text(coffee.name, 20, 30);
+            
+            // Description
+            if (coffee.description) {
+                doc.setFontSize(12);
+                doc.text('Descripción:', 20, 50);
+                doc.setFontSize(10);
+                const descLines = doc.splitTextToSize(coffee.description, 170);
+                doc.text(descLines, 20, 60);
+            }
+            
+            // Ingredients
+            doc.setFontSize(12);
+            doc.text('Ingredientes:', 20, 80);
+            doc.setFontSize(10);
+            let yPos = 90;
+            coffee.ingredients.forEach(ingredient => {
+                doc.text(`• ${ingredient}`, 25, yPos);
+                yPos += 8;
+            });
+            
+            // Preparation
+            doc.setFontSize(12);
+            doc.text('Preparación:', 20, yPos + 10);
+            doc.setFontSize(10);
+            yPos += 20;
+            coffee.preparation.forEach((step, index) => {
+                const stepText = doc.splitTextToSize(`${index + 1}. ${step}`, 165);
+                doc.text(stepText, 25, yPos);
+                yPos += stepText.length * 5 + 3;
+            });
+            
+            // Footer
+            doc.setFontSize(8);
+            doc.text(`Creado el: ${new Date(coffee.created_at).toLocaleDateString('es-ES')}`, 20, 280);
+            doc.text('Cafetería González', 150, 280);
+            
+            // Save PDF
+            doc.save(`${coffee.name.replace(/[^a-z0-9]/gi, '_')}.pdf`);
+            showNotification('PDF generado exitosamente');
+        }
+
+        async function exportAllCoffeesToPDF() {
+            try {
+                const response = await fetch('http://localhost:3000/api/custom-coffees');
+                
+                if (response.ok) {
+                    const coffees = await response.json();
+                    
+                    if (coffees.length === 0) {
+                        showNotification('No hay cafés para exportar', 'error');
+                        return;
+                    }
+                    
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+                    
+                    // Cover page
+                    doc.setFontSize(32);
+                    doc.text('Mis Cafés Personalizados', 105, 100, { align: 'center' });
+                    doc.setFontSize(16);
+                    doc.text('Cafetería González', 105, 120, { align: 'center' });
+                    doc.setFontSize(12);
+                    doc.text(`Generado el: ${new Date().toLocaleDateString('es-ES')}`, 105, 140, { align: 'center' });
+                    
+                    // Add each coffee
+                    coffees.forEach((coffee, index) => {
+                        if (index > 0) {
+                            doc.addPage();
+                        } else {
+                            doc.addPage(); // Start coffees on page 2
+                        }
+                        
+                        // Coffee name
+                        doc.setFontSize(20);
+                        doc.text(coffee.name, 20, 30);
+                        
+                        // Description
+                        let yPos = 45;
+                        if (coffee.description) {
+                            doc.setFontSize(10);
+                            doc.setFont(undefined, 'italic');
+                            const descLines = doc.splitTextToSize(coffee.description, 170);
+                            doc.text(descLines, 20, yPos);
+                            yPos += descLines.length * 5 + 10;
+                            doc.setFont(undefined, 'normal');
+                        }
+                        
+                        // Ingredients
+                        doc.setFontSize(14);
+                        doc.text('Ingredientes:', 20, yPos);
+                        doc.setFontSize(10);
+                        yPos += 10;
+                        coffee.ingredients.forEach(ingredient => {
+                            doc.text(`• ${ingredient}`, 25, yPos);
+                            yPos += 8;
+                        });
+                        
+                        // Preparation
+                        yPos += 5;
+                        doc.setFontSize(14);
+                        doc.text('Preparación:', 20, yPos);
+                        doc.setFontSize(10);
+                        yPos += 10;
+                        coffee.preparation.forEach((step, index) => {
+                            const stepText = doc.splitTextToSize(`${index + 1}. ${step}`, 165);
+                            doc.text(stepText, 25, yPos);
+                            yPos += stepText.length * 5 + 3;
+                        });
+                        
+                        // Footer for each page
+                        doc.setFontSize(8);
+                        doc.text(`Página ${doc.internal.getNumberOfPages()}`, 105, 280, { align: 'center' });
+                    });
+                    
+                    // Save PDF
+                    doc.save('mis_cafes_personalizados.pdf');
+                    showNotification('PDF con todos los cafés generado exitosamente');
+                } else {
+                    showNotification('Error al cargar los cafés', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error al generar el PDF', 'error');
+            }
         }
 
     </script>

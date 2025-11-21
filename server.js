@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 const { HfInference } = require('@huggingface/inference');
 require('dotenv').config();
 
@@ -9,6 +11,23 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Database setup
+const dbPath = path.join(__dirname, 'custom_coffees.db');
+const db = new sqlite3.Database(dbPath);
+
+// Initialize database
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS custom_coffees (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        description TEXT,
+        ingredients TEXT NOT NULL,
+        preparation TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        category TEXT DEFAULT 'custom'
+    )`);
+});
 
 // IMPORTANTE: La API key debe estar en el archivo .env, NO aquí
 const hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
@@ -178,6 +197,70 @@ Respuesta: "Para un capuchino necesitas 1/3 espresso + 1/3 leche + 1/3 espuma. P
             });
         }
     }
+});
+
+// Custom Coffee API Endpoints
+app.post('/api/custom-coffee', (req, res) => {
+    const { name, description, ingredients, preparation } = req.body;
+    
+    if (!name || !ingredients || !preparation) {
+        return res.status(400).json({ error: 'Name, ingredients, and preparation are required' });
+    }
+
+    const ingredientsText = Array.isArray(ingredients) ? ingredients.join('|') : ingredients;
+    const preparationText = Array.isArray(preparation) ? preparation.join('|') : preparation;
+    
+    const stmt = db.prepare(`INSERT INTO custom_coffees (name, description, ingredients, preparation) VALUES (?, ?, ?, ?)`);
+    stmt.run([name, description || '', ingredientsText, preparationText], function(err) {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Failed to save custom coffee' });
+        }
+        
+        res.json({
+            id: this.lastID,
+            name,
+            description,
+            ingredients: ingredientsText,
+            preparation: preparationText,
+            message: 'Custom coffee saved successfully!'
+        });
+    });
+    stmt.finalize();
+});
+
+app.get('/api/custom-coffees', (req, res) => {
+    db.all(`SELECT * FROM custom_coffees ORDER BY created_at DESC`, (err, rows) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Failed to retrieve custom coffees' });
+        }
+        
+        const formattedRows = rows.map(row => ({
+            ...row,
+            ingredients: row.ingredients.split('|'),
+            preparation: row.preparation.split('|')
+        }));
+        
+        res.json(formattedRows);
+    });
+});
+
+app.delete('/api/custom-coffee/:id', (req, res) => {
+    const { id } = req.params;
+    
+    db.run(`DELETE FROM custom_coffees WHERE id = ?`, [id], function(err) {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Failed to delete custom coffee' });
+        }
+        
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Custom coffee not found' });
+        }
+        
+        res.json({ message: 'Custom coffee deleted successfully' });
+    });
 });
 
 // Endpoint de salud
