@@ -2072,7 +2072,7 @@
         }
 
         // Custom Coffee Builder Functions
-        let selectedIngredients = new Set();
+        let selectedIngredients = new Map();
         
         function openCustomCoffeeBuilder() {
             document.getElementById('customCoffeeModal').classList.add('show');
@@ -2109,7 +2109,7 @@
             
             if (checkbox.checked) {
                 item.classList.add('selected');
-                selectedIngredients.add({
+                selectedIngredients.set(ingredientId, {
                     id: ingredientId,
                     name: displayName,
                     quantity: qtyInput.value,
@@ -2117,7 +2117,7 @@
                 });
             } else {
                 item.classList.remove('selected');
-                selectedIngredients = new Set([...selectedIngredients].filter(ing => ing.id !== ingredientId));
+                selectedIngredients.delete(ingredientId);
             }
             
             updateCoffeePreview();
@@ -2155,6 +2155,13 @@
         // Event listeners for quantity changes
         document.addEventListener('input', function(e) {
             if (e.target.type === 'number' && e.target.id.includes('-qty')) {
+                // Update quantity in the Map
+                const ingredientId = e.target.id.replace('-qty', '');
+                if (selectedIngredients.has(ingredientId)) {
+                    const ingredient = selectedIngredients.get(ingredientId);
+                    ingredient.quantity = e.target.value;
+                    selectedIngredients.set(ingredientId, ingredient);
+                }
                 updateCoffeePreview();
             }
             
@@ -2184,15 +2191,17 @@
             // Generate basic preparation steps based on ingredients
             preparation.push('Prepara todos los ingredientes');
             
-            if ([...selectedIngredients].some(ing => ing.id === 'espresso' || ing.id === 'cafe-molido')) {
+            const ingredientIds = Array.from(selectedIngredients.keys());
+            
+            if (ingredientIds.some(id => id === 'espresso' || id === 'cafe-molido' || id === 'cafe-filtrado')) {
                 preparation.push('Prepara el café según el tipo seleccionado');
             }
             
-            if ([...selectedIngredients].some(ing => ing.id === 'leche' || ing.id === 'espuma-leche')) {
+            if (ingredientIds.some(id => id === 'leche' || id === 'espuma-leche')) {
                 preparation.push('Calienta y espuma la leche si es necesario');
             }
             
-            if ([...selectedIngredients].some(ing => ing.id === 'chocolate' || ing.id === 'canela' || ing.id === 'vainilla')) {
+            if (ingredientIds.some(id => id === 'chocolate' || id === 'canela' || id === 'vainilla')) {
                 preparation.push('Añade saborizantes y especias al gusto');
             }
             
